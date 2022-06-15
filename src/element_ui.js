@@ -11,7 +11,16 @@ import {
   Row,
   Autocomplete,
   Avatar,
-  Scrollbar
+  Scrollbar,
+  Card,
+  Image,
+  Table,
+  TableColumn,
+  Message,
+  Notification,
+  DropdownMenu,
+  DropdownItem,
+  Dropdown,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -26,3 +35,13 @@ Vue.use(Col)
 Vue.use(Autocomplete)
 Vue.use(Avatar)
 Vue.use(Scrollbar)
+Vue.use(Card)
+Vue.use(Image)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Dropdown)
+
+Vue.prototype.$message = Message
+Vue.prototype.$notify = Notification

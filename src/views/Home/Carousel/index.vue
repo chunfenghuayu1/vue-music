@@ -3,10 +3,13 @@
     <swiper-slide
       v-for="item in bannerList"
       :key="item.targetId"
-      :style="{
-        backgroundImage: 'url(' + `${item.imageUrl}` + ')',
-      }"
-    ></swiper-slide>
+      :style="{ backgroundImage: `url(${item.imageUrl}?param=320y120)` }"
+    >
+      <!-- <img
+        :src="item.imageUrl"
+        style="width: 100%; height: 100%; vertical-align: middle"
+      /> -->
+    </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
     <!-- <div class="swiper-button-prev" slot="button-prev"></div>
     <div class="swiper-button-next" slot="button-next"></div> -->
@@ -27,6 +30,7 @@ export default {
     return {
       swiperOption: {
         // loop: true,
+        spaceBetween: 10, // 图片间距
         autoplay: {
           delay: 3000,
           stopOnLastSlide: false,
@@ -34,7 +38,6 @@ export default {
         },
         slidesPerView: 4, // 展示几张
         // centeredSlides: true,//图片居中
-        spaceBetween: 10, // 图片间距
         // 显示分页
         pagination: {
           el: '.swiper-pagination',
@@ -52,23 +55,29 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .swiper-container {
-  height: 125px;
-  padding-bottom: 30px;
+  height: 120px;
+  padding-bottom: 35px;
+  margin-bottom: 10px;
   .swiper-wrapper {
     .swiper-slide {
+      // height: 100%;
+      // margin: 0 10px;
+      // bug图片刷新会显示不全
+      width: 24.45%!important;
       border-radius: 15px;
       background-position: center center;
       background-repeat: no-repeat;
-      background-size:cover;
+      background-size: cover;
+      overflow: hidden;
       cursor: pointer;
     }
   }
   .swiper-pagination {
     .swiper-pagination-bullet-active {
       border-radius: 4px;
-      animation: widthChange .2s linear forwards;
+      animation: widthChange 0.2s linear forwards;
       background-color: rgb(99, 187, 208);
     }
   }

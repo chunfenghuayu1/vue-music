@@ -8,6 +8,26 @@ export default [
     path: '/home',
     name: 'Home',
     component: () => import('@/views/Home')
+  },
+  {
+    path: '/rank',
+    name: 'Rank',
+    component: () => import('@/views/Rank')
+  },
+  {
+    path: '/playlist',
+    name: 'PlayList',
+    component: () => import('@/views/PlayList')
+  },
+  {
+    path: '/artist',
+    name: 'Artist',
+    component: () => import('@/views/Artist')
+  },
+  {
+    path: '/mv',
+    name: 'MV',
+    component: () => import('@/views/MV')
   }
   // {
   //   path: '/about',

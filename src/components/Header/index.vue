@@ -68,7 +68,7 @@
       <el-col :span="18">
         <Search></Search>
       </el-col>
-      <el-col :span="3" style="">
+      <el-col :span="3">
         <el-avatar
           src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
           style="verticalAlign: middle;"
@@ -90,7 +90,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .el-row {
   height: 100%;
 }

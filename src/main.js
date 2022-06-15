@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 // 初始化全局样式
-import '../public/reset.css'
+import './assets/style/reset.css'
 // 引入图标
 import '@/assets/style/iconfont.css'
 // 引入element组件

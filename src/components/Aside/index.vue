@@ -19,7 +19,7 @@ export default {
       barList: [
         { name: '发现音乐', path: '/home', icon: 'icon-shouyeshouye' },
         { name: '排行榜', path: '/rank', icon: 'icon-paihangbang' },
-        { name: '歌单', path: '/list', icon: 'icon-list' },
+        { name: '歌单', path: '/playlist', icon: 'icon-list' },
         { name: '歌手', path: '/artist', icon: 'icon-artist' },
         { name: 'MV', path: '/mv', icon: 'icon-bofangMV' }
       ]
@@ -28,10 +28,7 @@ export default {
 }
 </script>
 
-<style lang="less">
-.el-scrollbar__wrap {
-  overflow-x: hidden!important;
-}
+<style lang="less" scoped>
 ul {
   padding-left: 20px;
   li {
