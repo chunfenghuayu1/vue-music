@@ -8,7 +8,7 @@ const request = axios.create({
   // proxy代理已经配置
   baseURL: '/api',
   // `withCredentials` 表示跨域请求时是否需要使用凭证
-  // withCredentials: true,
+  withCredentials: true,
   // 请求超时
   timeout: 5000
 })
