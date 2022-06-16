@@ -1,4 +1,5 @@
 // 发现音乐、排行榜数据放在这里处理
+import { formatPlayCount } from '@/utils/formatCount'
 import {
   reqBanner,
   reqRankList,
@@ -41,6 +42,11 @@ const mutations = {
     state.playListTags.unshift(obj)
   },
   GETPLAYLISTDETAIL (state, data) {
+    // console.log(data)
+    // 处理播放量数据
+    data.forEach(item => {
+      item.playCount = formatPlayCount(item.playCount)
+    })
     state.playListDetail = data
   }
 }

@@ -1,26 +1,26 @@
 <template>
   <el-card shadow="always" :body-style="{ padding: '20px' }">
     <!-- card body -->
-    <el-row :gutter="30" type="flex" align="middle">
-      <el-col :span="10">
+    <el-row :gutter="20" type="flex" align="middle">
+      <el-col :span="8">
         <el-image
-          :src="`${list.coverImgUrl}?param=500y500`"
+          :src="`${list.coverImgUrl}?param=200y200`"
           fit="cover"
           :lazy="true"
         ></el-image>
       </el-col>
-      <el-col :span="14">
+      <el-col :span="16">
         <div class="list">
           <ul>
             <li v-for="(item,index) in list.list" :key="index">
               <el-row type="flex">
                 <el-col :span="2" class="type">{{index+1}}</el-col>
-                <el-col :span="3" class="state">
+                <el-col :span="2" class="state">
                 <span class="el-icon-caret-top" v-if="item.pop==100?true:false"></span>
-                <span v-else>-</span>
+                <span v-else class="el-icon-minus"></span>
                 </el-col>
                 <el-col :span="8" class="songname">{{item.name}}</el-col>
-                <el-col :span="11" class="author" :pull="1"
+                <el-col :span="12" class="author" :pull="1"
                   ><span v-for="(ar,index) in item.ar" :key="index">{{ar.name}} </span></el-col
                 >
               </el-row>
@@ -46,8 +46,6 @@ export default {
 <style lang="less" scoped>
 .el-image {
   border-radius: 10px;
-  width: 100%;
-  height: 100%;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .list {

@@ -1,4 +1,5 @@
 // 歌单数据放这里
+import { formatPlayCount } from '@/utils/formatCount'
 import { reqListTags, reqPlayListDetail } from '@/api'
 
 const state = {
@@ -12,8 +13,14 @@ const mutations = {
     state.tags = data
   },
   GETTAGLIST (state, data) {
+    data.playlists.forEach((item) => {
+      if (item.playCount) {
+        item.playCount = formatPlayCount(item.playCount)
+      }
+    })
     state.tagList = data
   }
+
 }
 const actions = {
   // 获取所有歌单标签
@@ -51,6 +58,7 @@ const getters = {
     }
     return list
   }
+
 }
 
 export default {

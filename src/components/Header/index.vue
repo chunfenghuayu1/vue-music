@@ -77,7 +77,6 @@
         <span style="marginLeft:20px;cursor: pointer;" v-else>退出登录</span>
       </el-col>
     </el-col>
-    <el-col :span="3"> </el-col>
   </el-row>
 </template>
 

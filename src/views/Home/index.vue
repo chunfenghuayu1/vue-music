@@ -21,7 +21,4 @@ export default {
 </script>
 
 <style>
-.el-icon-caret-top {
-  color: #606266;
-}
 </style>

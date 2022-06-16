@@ -75,7 +75,7 @@ export default {
     }
   }
   .swiper-pagination {
-    .swiper-pagination-bullet-active {
+   /deep/ .swiper-pagination-bullet-active {
       border-radius: 4px;
       animation: widthChange 0.2s linear forwards;
       background-color: rgb(99, 187, 208);

@@ -25,7 +25,9 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
 }
 p {
+  height: 30px;
   margin-top: 0;
+  margin-bottom: 5px;
   text-align: left;
   font-size: 14px;
   color: #606266;

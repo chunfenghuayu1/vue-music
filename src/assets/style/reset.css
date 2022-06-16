@@ -38,3 +38,6 @@ a {
   transition: all .3s linear;
   cursor: pointer;
 }
+.el-icon-caret-top {
+  color: #606266;
+}

@@ -93,10 +93,10 @@ export default {
 }
 /* 过渡动画 */
 .fade-enter-active {
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 .fade-leave-active {
-  transition: all .1s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .fade-enter, .fade-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {

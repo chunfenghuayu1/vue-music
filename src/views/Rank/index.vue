@@ -8,7 +8,11 @@
         </el-col>
       </el-row>
       <el-row :gutter="20">
-        <el-col :span="12" v-for="(list,index) in officialRankList" :key="index">
+        <el-col
+          :span="12"
+          v-for="(list, index) in officialRankList"
+          :key="index"
+        >
           <OfficialRank :list="list"></OfficialRank>
         </el-col>
       </el-row>
@@ -21,11 +25,13 @@
         </el-col>
       </el-row>
       <el-row :gutter="20">
-        <el-col :span="4"  v-for="(list,index) in rankAllList" :key="index" class="body">
+        <el-col :span="4" v-for="(list, index) in rankAllList" :key="index">
           <GlobalRank :list="list"></GlobalRank>
         </el-col>
       </el-row>
     </div>
+    <!-- 回到顶部按钮 -->
+    <el-backtop></el-backtop>
   </div>
 </template>
 
@@ -38,14 +44,13 @@ export default {
   computed: {
     ...mapGetters(['officialRankList']),
     ...mapState({
-      rankAllList: state => state.home.rankAllList
-    })
-  }
+      rankAllList: (state) => state.home.rankAllList,
+    }),
+  },
 }
 </script>
 
 <style lang="less" scoped>
-
 .el-card {
   border-radius: 10px;
 }
@@ -54,5 +59,4 @@ h1 {
   text-align: left;
   margin-top: 0;
 }
-
 </style>

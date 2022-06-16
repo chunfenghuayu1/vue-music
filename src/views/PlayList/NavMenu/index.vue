@@ -10,7 +10,9 @@
               v-for="(sub, index) in categories.tags.slice(0, 8)"
               :key="index"
             >
-              <em @click="changeList(sub.name)">{{ sub.name }}</em>
+              <em @click="changeList(sub.name)"
+              :class="sub.name==title?'active':''"
+               >{{ sub.name }}</em>
             </span>
             <el-dropdown
               class="more"
@@ -41,12 +43,18 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  props: ['title'],
   computed: {
     ...mapGetters(['tagsList'])
   },
   methods: {
     changeList (val) {
-      this.$emit('changeList2', val)
+      // 控制样式
+      this.name = val
+      const { query } = this.$route
+      if (query.cat !== val) {
+        this.$router.push({ path: '/playlist', query: { cat: val, order: 'hot' } })
+      }
     }
   }
 }
@@ -73,16 +81,15 @@ export default {
 .title {
   font-weight: bold;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .body {
-  width: 100%;
   span {
     display: inline-block;
-    width: 30%;
+    width: calc(100% /  3);
     em {
       font-size: 14px;
-      line-height: 26px;
+      line-height: 25px;
       cursor: pointer;
       font-style: normal;
     }
@@ -97,5 +104,12 @@ export default {
 }
 .el-icon-arrow-down {
   font-size: 12px;
+}
+.active {
+  background: #63bbd0;
+  border-radius: 3px;
+  color: #f5f5f5;
+  padding: 5px;
+  margin: 5px -5px 0;
 }
 </style>

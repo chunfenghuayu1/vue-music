@@ -11,6 +11,8 @@ import './element_ui'
 // 全局挂载aixios
 import API from './api'
 Vue.prototype.$http = API
+// bus传递参数
+Vue.prototype.$bus = new Vue()
 
 Vue.config.productionTip = false
 
