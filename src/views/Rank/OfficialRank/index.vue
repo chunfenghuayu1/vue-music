@@ -12,16 +12,21 @@
       <el-col :span="16">
         <div class="list">
           <ul>
-            <li v-for="(item,index) in list.list" :key="index">
+            <li v-for="(item, index) in list.list" :key="index">
               <el-row type="flex">
-                <el-col :span="2" class="type">{{index+1}}</el-col>
+                <el-col :span="2" class="type">{{ index + 1 }}</el-col>
                 <el-col :span="2" class="state">
-                <span class="el-icon-caret-top" v-if="item.pop==100?true:false"></span>
-                <span v-else class="el-icon-minus"></span>
+                  <span
+                    class="el-icon-caret-top"
+                    v-if="item.pop == 100 ? true : false"
+                  ></span>
+                  <span v-else class="el-icon-minus"></span>
                 </el-col>
-                <el-col :span="8" class="songname">{{item.name}}</el-col>
+                <el-col :span="8" class="songname">{{ item.name }}</el-col>
                 <el-col :span="12" class="author" :pull="1"
-                  ><span v-for="(ar,index) in item.ar" :key="index">{{ar.name}} </span></el-col
+                  ><span v-for="(ar, index) in item.ar" :key="index"
+                    >{{ ar.name }}
+                  </span></el-col
                 >
               </el-row>
             </li>
@@ -80,7 +85,7 @@ export default {
     }
   }
 }
-.type{
+.type {
   color: #f56c6c;
   text-align: center;
 }
@@ -90,6 +95,12 @@ export default {
 }
 .songname {
   color: #606266;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
 }
 .author {
   color: #909399;
@@ -110,6 +121,6 @@ export default {
   cursor: pointer;
 }
 .el-icon-caret-top {
-  color:red
+  color: red;
 }
 </style>

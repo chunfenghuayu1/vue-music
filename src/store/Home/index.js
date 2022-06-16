@@ -135,15 +135,18 @@ const getters = {
   // 官方榜数据
   officialRankList (state) {
     const list2 = []
-    state.rankListDetail.forEach((item) => {
-      const obj = {}
-      obj.id = item.playlist.id
-      obj.name = item.playlist.name
-      obj.coverImgUrl = item.playlist.coverImgUrl
-      obj.updateTime = item.playlist.updateTime
-      obj.list = item.playlist.tracks.slice(0, 5)
-      list2.push(obj)
-    })
+    // 判断数据，避免加载不完全
+    if (state.rankListDetail.length >= 4) {
+      state.rankListDetail.forEach((item) => {
+        const obj = {}
+        obj.id = item.playlist.id
+        obj.name = item.playlist.name
+        obj.coverImgUrl = item.playlist.coverImgUrl
+        obj.updateTime = item.playlist.updateTime
+        obj.list = item.playlist.tracks.slice(0, 5)
+        list2.push(obj)
+      })
+    }
     return list2
   }
 }

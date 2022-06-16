@@ -40,13 +40,14 @@
 
 <script>
 export default {
-  props: {
-    list: {
-      require: true,
-      default: () => {},
-      type: Object
-    }
-  }
+  // props: {
+  //   list: {
+  //     require: true,
+  //     default: () => {},
+  //     type: Object
+  //   }
+  // }
+  props: ['list']
 }
 </script>
 
