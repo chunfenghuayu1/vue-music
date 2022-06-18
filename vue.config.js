@@ -12,6 +12,7 @@ module.exports = defineConfig({
     proxy: {
       '/api': {
         target: 'https://netease-cloud-music-api-omega-henna.vercel.app',
+        changeOrigin: true,
         pathRewrite: { '^/api': '' }
       }
     }

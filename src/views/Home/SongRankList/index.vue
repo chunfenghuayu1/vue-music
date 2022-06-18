@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="20"  type="flex">
-      <el-col :span="6" v-for="item in newRankList" :key="item.name">
+      <el-col :span="6" v-for="(item,index) in newRankList" :key="index">
       <RankCard :list="item"></RankCard>
       </el-col>
       <!-- <el-col :span="6">

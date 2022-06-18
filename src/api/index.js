@@ -26,3 +26,26 @@ export const reqListTags = () => request({ url: '/playlist/catlist', method: 'ge
     * offset: 0
 */
 export const reqArtistList = (type, area, initial, limit, offset) => request({ url: `/artist/list?type=${type}&area=${area}&initial=${initial}&limit=${limit}&offset=${offset}`, method: 'get' })
+
+// 获取歌曲的详情
+export const reqSongDetail = (id, timestamp = 0) => request({ url: `/song/detail?ids=${id}&timestamp=${timestamp}`, method: 'get' })
+// 获取相似歌曲 /simi/song
+export const reqSimiSong = (id) => request({ url: `/simi/song?id=${id}`, method: 'get' })
+// 获取歌词
+export const reqLyric = (id) => request({ url: `/lyric?id=${id}`, method: 'get' })
+// 获取评论
+export const reqComment = (id, limit) => request({ url: `/comment/music?id=${id}&limit=${limit}`, method: 'get' })
+
+/* ********* MV ********* */
+// 获取 mv
+export const reqMv = ({ area = '', type = '', order = '', limit = 50, offset = 0 }) => request({ url: `/mv/all?area=${area}&type=${type}&order=${order}&limit=${limit}&offset=${offset}`, method: 'get' })
+// 获取 mv详情
+export const mvDetail = ({ id = '' }) => request({ url: `/mv/detail?mvid=${id}`, method: 'get' })
+// 获取 地址
+export const mvUrl = ({ id = '', r = 1080 }) => request({ url: `/mv/url?id=${id}&r=${r}`, method: 'get' })
+
+// 获取mv评论
+export const commentMv = ({ id = '', limit = 20, offset = 0, before = 0, timestamp = 0 }) => request({ url: `/comment/mv?id=${id}&limit=${limit}&offset=${offset}&before=${before}&timestamp=${timestamp}`, method: 'get' })
+
+// 相似mv
+export const simiMv = ({ id = '' }) => request({ url: `/simi/mv?mvid=${id}`, method: 'get' })

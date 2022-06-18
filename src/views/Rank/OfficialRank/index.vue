@@ -105,6 +105,12 @@ export default {
 .author {
   color: #909399;
   text-align: right;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
 }
 .author span:hover {
   color: #606266;

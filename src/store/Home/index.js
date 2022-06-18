@@ -75,6 +75,7 @@ const actions = {
   },
   // 获取排行榜单详细数据
   getRankListDetail (ctx) {
+    ctx.state.rankListDetail = []
     ctx.state.rankList.forEach(async (item) => {
       const { data } = await reqRankListDetail(item.id)
       if (data.code === 200) {
@@ -108,8 +109,8 @@ const actions = {
     //     return Promise.reject(new Error('获取获取热门歌单详情失败'))
     //   }
     // })
-    const newName = name === '为您推荐' ? '' : name
-    const { data } = await reqPlayListDetail(newName)
+    const cat = name === '为您推荐' ? '' : name
+    const { data } = await reqPlayListDetail('hot', cat, 6)
     if (data.code === 200) {
       // console.log(data)
       // 把数据直接存入tags里面

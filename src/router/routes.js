@@ -15,9 +15,24 @@ export default [
     component: () => import('@/views/Rank')
   },
   {
+    path: '/rank/detail',
+    name: 'RankDetail',
+    component: () => import('@/views/Detail/RankDetail')
+  },
+  {
+    path: '/songdetail',
+    name: 'SongDetail',
+    component: () => import('@/views/Detail/SongDetail')
+  },
+  {
     path: '/playlist',
     name: 'PlayList',
     component: () => import('@/views/PlayList')
+  },
+  {
+    path: '/playlist/detail',
+    name: 'PlayListDetail',
+    component: () => import('@/views/Detail/PlayListDetail')
   },
   {
     path: '/artist',
@@ -25,9 +40,19 @@ export default [
     component: () => import('@/views/Artist')
   },
   {
+    path: '/artist/detail',
+    name: 'ArtistDetail',
+    component: () => import('@/views/Detail/ArtistDetail')
+  },
+  {
     path: '/mv',
     name: 'MV',
     component: () => import('@/views/MV')
+  },
+  {
+    path: '/mv/detail',
+    name: 'MvDetail',
+    component: () => import('@/views/Detail/MvDetail')
   }
   // {
   //   path: '/about',

@@ -6,6 +6,7 @@
           :src="`${item.coverImgUrl}?param=250y250`"
           fit="cover"
           :lazy="true"
+          @click="goTarget(item.id)"
         ></el-image>
         <p class="count">
           <i class="el-icon-video-play"></i>
@@ -14,7 +15,7 @@
           <i>{{ item.trackCount }}首</i>
         </p>
         <div>
-          <a class="body-title">{{ item.name }}</a>
+          <a class="body-title" @click="goTarget(item.id)">{{ item.name }}</a>
           <div class="tags">
             <a
               v-for="(tag, index) in item.tags"
@@ -39,6 +40,7 @@ export default {
   },
   props: ['playListDetail'],
   methods: {
+    // 标签跳转
     toTarget (tag) {
       // 路由传参,因为没有order参数,所以默认添加order参数
       const { query } = this.$route
@@ -48,6 +50,13 @@ export default {
           query: { cat: tag, order: 'hot' }
         })
       }
+    },
+    // 内容跳转,点击图片或者标题,跳转到相应的歌单页面
+    goTarget (id) {
+      this.$router.push({
+        path: '/playlist/detail',
+        query: { id }
+      })
     }
   }
 }

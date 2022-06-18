@@ -1,9 +1,9 @@
 <template>
   <div>
     <!-- 导航菜单部分 -->
-    <NavMenu  :title="cat"></NavMenu>
+    <NavMenu :title="cat"></NavMenu>
     <!-- 内容部分 -->
-    <Content  :title="cat"></Content>
+    <Content :title="cat"></Content>
     <!-- 回到顶部按钮 -->
     <el-backtop></el-backtop>
   </div>
@@ -35,8 +35,16 @@ export default {
     },
     // 初始化内容数据
     async getTagList () {
-      const { order, cat, limit } = this
-      await this.$store.dispatch('getTagList', [order, cat, limit])
+      try {
+        const { order, cat, limit } = this
+        await this.$store.dispatch('getTagList', [order, cat, limit])
+      } catch (error) {
+        this.$notify({
+          title: '失败',
+          message: '歌单列表数据加载失败',
+          type: 'error'
+        })
+      }
     }
     // 获取content组件传递的参数
     // changeList1 (val) {

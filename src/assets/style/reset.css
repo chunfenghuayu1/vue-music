@@ -15,6 +15,10 @@ a {
   text-decoration: none;
   color: #333;
 }
+p {
+  margin: 0;
+  padding: 0;
+}
 .el-container {
   max-width: 1920px!important;
   width: 100%;

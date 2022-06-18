@@ -1,0 +1,141 @@
+<template>
+  <!-- 评论 -->
+  <div class="comment">
+    <div class="header">
+      <h2>评论<em>共{{list.total}}条评论</em></h2>
+    </div>
+    <!-- 输入文本框 -->
+    <div class="textarea">
+      <el-input
+        type="textarea"
+        :rows="4"
+        placeholder="期待你的评论......"
+        v-model="textarea"
+        maxlength="140"
+        show-word-limit
+        resize="none"
+      >
+      </el-input>
+      <el-button
+        size="default"
+        round
+        type="danger"
+        style="
+          background-color: #63bbd0;
+          border-color: #63bbd0;
+          margin-top: 10px; ;
+        "
+        >评论</el-button
+      >
+    </div>
+    <!-- 评论区 -->
+    <div class="comment-area">
+      <div class="comment-item" v-for="item in list.comments" :key="item.commentId">
+        <div class="left">
+          <img :src="`${item.user.avatarUrl}?param=50y50`" />
+        </div>
+        <div class="right">
+          <p class="username">{{item.user.nickname}}</p>
+          <p class="text">{{item.content}}</p>
+          <!-- 回复的评论 需要按需展示 -->
+          <div class="comment-reply" v-for="reply in item.beReplied" :key="reply.beRepliedCommentId"><span>{{reply.user.nickname}}:</span>{{reply.content}}</div>
+          <div class="foot">
+            <span class="time">{{item.time1}} {{item.timeStr}}</span>
+            <span class="tips el-icon-star-off">({{item.likedCount}}) <i class="el-icon-chat-dot-square"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      textarea: ''
+    }
+  },
+  props: ['list']
+}
+</script>
+
+<style lang="less" scoped>
+.comment {
+  .header {
+    padding-top: 30px;
+    h2 {
+      font-weight: normal;
+      em {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: normal;
+        color: #909399;
+        margin-left: 20px;
+      }
+    }
+  }
+  .comment-area {
+    margin-top: 20px;
+    .comment-item {
+      display: flex;
+      border: 1px solid #ebeef5;
+      background-color: #fff;
+      overflow: hidden;
+      color: #303133;
+      transition: 0.3s;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+      padding: 15px 15px;
+      margin-bottom: 15px;
+      .left {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 10px;
+        background-color: pink;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .right {
+        flex: 1;
+        font-size: 14px;
+        .username {
+          color: #909399;
+          padding-bottom: 10px;
+        }
+        .text {
+          padding-bottom: 10px;
+        }
+        // 回复的评论
+        .comment-reply {
+          background: #fafafa;
+          border-radius: 5px;
+          box-shadow: 0 0 27px #0000000f inset;
+          padding: 10px;
+          margin: 5px 0;
+          line-height: 28px;
+          span:nth-child(1) {
+            color: #909399;
+            margin-right: 5px;
+          }
+        }
+        .foot {
+          display: flex;
+          justify-content: space-between;
+          color: #909399;
+          .tips {
+            i {
+              font-style: normal;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>

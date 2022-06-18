@@ -8,7 +8,7 @@
       </el-row>
       <el-row>
         <el-col>
-          <span class="header-tip">最近更新：06月14日(每周四更新)</span>
+          <span class="header-tip">最近更新：{{updateTime}}</span>
         </el-col>
       </el-row>
     </div>
@@ -21,6 +21,7 @@
               style="width: 50px; height: 50px"
               :src="item.al.picUrl + '?param=50y50'"
               fit="cover"
+              :lazy="true"
             ></el-image>
           </div>
           <div class="title">
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+import { formartDate } from '@/utils/formatCount'
 export default {
   // props: {
   //   list: {
@@ -47,7 +49,12 @@ export default {
   //     type: Object
   //   }
   // }
-  props: ['list']
+  props: ['list'],
+  computed: {
+    updateTime () {
+      return formartDate(this.list.updateTime, 'MM月dd日HH时mm分')
+    }
+  }
 }
 </script>
 

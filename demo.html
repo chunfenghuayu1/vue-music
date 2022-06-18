@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function set(val) {
+        //转数组
+        const newval = val.split('')
+        const arr = []
+        const res = []
+        //去重
+        newval.forEach((item, index) => {
+          if (arr.indexOf(item) == -1) {
+            arr.push(item)
+            res.push(item)
+          } else {
+            res[arr.indexOf(item)] += item
+          }
+        })
+        console.log(res);
+        //把相同的字符串存在一起,找到最长长度
+        // const res = []
+        // let length = 0
+        // arr.forEach((item) => {
+        //   count = 0
+        //   str = ''
+        //   newval.forEach((item1) => {
+        //     if (item == item1) {
+        //       count++
+        //     }
+        //   })
+        //   for (let i = 0; i < count; i++) {
+        //     str += item
+        //   }
+        //   if (count > length) {
+        //     length = count
+        //   }
+        //   res.push(str)
+        // })
+        // //找出字符串最多的或相同最大长度
+        // const result = []
+        // res.forEach((item) => {
+        //   if (item.length >= length) {
+        //     console.log(item)
+        //   }
+        // })
+      }
+      set('ddadafffasdasdasweqwexcvcxaaa')
+    </script>
+  </body>
+</html>
