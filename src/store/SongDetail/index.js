@@ -20,7 +20,7 @@ const mutations = {
   },
   GETCOMMENTLIST (state, data) {
     data.comments.forEach(item => {
-      item.time1 = formatSong.formartDate(item.time, 'MM月dd日')
+      item.time1 = formatSong.formartDate(item.time, 'yyyy年MM月dd日')
     })
     data.comments = [...data.hotComments, ...data.comments]
     state.commentList = data

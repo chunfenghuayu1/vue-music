@@ -1,10 +1,10 @@
 <template>
   <swiper :options="swiperOption" ref="mySwiper">
       <swiper-slide
-      v-for="item in bannerList"
-      :key="item.targetId"
+      v-for="(item,index) in bannerList"
+      :key="index"
     >
-    <img :src="`${item.imageUrl}?param=320y120`" @click="getTarget(item.targetType,item.targetId)">
+    <img :src="`${item.imageUrl}?param=640y240`" @click="getTarget(item.targetType,item.targetId)">
       <p class="tag">{{ item.typeTitle }}</p>
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
@@ -52,6 +52,7 @@ export default {
   methods: {
     getTarget (type, id) {
       // type 1新歌首发 1000歌单 10新碟
+      // console.log(type, id)
       switch (type) {
         case 1:
           this.$router.push({ path: '/songdetail', query: { id } })
@@ -60,7 +61,7 @@ export default {
           // 暂无
           break
         case 1000:
-          this.$router.push({ path: '/playlist/detail', query: { id } })
+          this.$router.push({ path: '/rank/detail', query: { id } })
       }
     }
   }
@@ -69,7 +70,7 @@ export default {
 
 <style lang="less" scoped>
 .swiper-container {
-  height: 150px;
+  height: 120px;
   padding-bottom: 35px;
   margin-bottom: 10px;
   .swiper-wrapper {
@@ -89,7 +90,7 @@ export default {
       img {
         width: 100%;
         height: 100%;
-        object-fit: fill;
+        object-fit: cover;
       }
     }
     .tag {

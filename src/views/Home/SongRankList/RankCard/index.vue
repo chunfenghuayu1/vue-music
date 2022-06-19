@@ -8,7 +8,7 @@
       </el-row>
       <el-row>
         <el-col>
-          <span class="header-tip">最近更新：{{updateTime}}</span>
+          <span class="header-tip">最近更新：{{ updateTime }}</span>
         </el-col>
       </el-row>
     </div>
@@ -17,15 +17,19 @@
       <ul>
         <li v-for="item in list.list" :key="item.id">
           <div class="img">
-            <el-image
-              style="width: 50px; height: 50px"
-              :src="item.al.picUrl + '?param=50y50'"
-              fit="cover"
-              :lazy="true"
-            ></el-image>
+            <router-link :to="{ path: '/songdetail', query: { id: item.id } }">
+              <el-image
+                style="width: 50px; height: 50px"
+                :src="item.al.picUrl + '?param=50y50'"
+                fit="cover"
+                :lazy="true"
+              ></el-image>
+            </router-link>
           </div>
           <div class="title">
-            <a>{{ item.name }}</a>
+            <router-link :to="{ path: '/songdetail', query: { id: item.id } }">
+              {{ item.name }}
+            </router-link>
             <!-- <a v-for="artist in item.ar" :key="artist.id">{{artist.name}}</a> -->
             <a
               ><i v-for="artist in item.ar" :key="artist.id"
@@ -80,7 +84,6 @@ export default {
         &:hover {
           background-color: #f2f6fc;
           border-radius: 10px;
-          cursor: pointer;
         }
         .img {
           margin-right: 20px;
@@ -92,6 +95,7 @@ export default {
         .title {
           display: flex;
           flex-direction: column;
+          cursor: pointer;
           a {
             line-height: 25px;
             -webkit-line-clamp: 1;

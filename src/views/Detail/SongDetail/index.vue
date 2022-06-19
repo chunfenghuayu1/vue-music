@@ -23,10 +23,10 @@
               </p>
             </div>
             <div class="right">
-              <div class="pic">
+              <div>
                 <el-image
                   v-if="song.album"
-                  :src="`${song.album.picUrl}?param=320y120`"
+                  :src="`${song.album.picUrl}?param=230y230`"
                   fit="cover"
                   :lazy="true"
                 ></el-image>
@@ -55,12 +55,16 @@
             :body-style="{ padding: '0px 20px 10px 20px' }"
           >
             <div slot="header">
-              <span>相似歌曲</span>
+              <span>推荐歌曲</span>
             </div>
             <!-- card body -->
             <div class="recom" v-for="item in simiSong" :key="item.id">
               <div class="left">
-                <p>{{ item.album.name }}</p>
+                <router-link
+                  :to="{ path: '/songdetail', query: { id: item.id } }"
+                >
+                  <p>{{ item.name }}</p>
+                </router-link>
                 <p>
                   <span
                     v-for="(item1, index) in item.album.artists"
@@ -117,6 +121,8 @@
     <div class="aside">
       <Lyric></Lyric>
     </div>
+    <!-- 回到顶部按钮 -->
+    <el-backtop></el-backtop>
   </div>
 </template>
 
@@ -203,11 +209,12 @@ export default {
           .right {
             flex: 1;
             display: flex;
+            justify-content: center;
+            align-items: center;
             .el-image {
               vertical-align: middle;
               overflow: hidden;
               border-radius: 50%;
-              height: 100%;
               // animation: rotate1 10s linear infinite;
             }
             @keyframes rotate1 {
@@ -233,7 +240,7 @@ export default {
           align-items: center;
           border-bottom: 1px solid #f2f2f2;
           .left {
-            font-size: 12px;
+            font-size: 14px;
             margin-bottom: 5px;
             margin-top: 5px;
             p {
@@ -265,7 +272,7 @@ export default {
   margin-bottom: 0px;
   /deep/ .el-card__header {
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
   }
 }

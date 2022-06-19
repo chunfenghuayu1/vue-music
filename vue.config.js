@@ -11,8 +11,9 @@ module.exports = defineConfig({
     // 配置代理，请求api
     proxy: {
       '/api': {
+        // target: 'https://netease-cloud-music-api-omega-henna.vercel.app',
         target: 'https://netease-cloud-music-api-omega-henna.vercel.app',
-        changeOrigin: true,
+        // changeOrigin: true,
         pathRewrite: { '^/api': '' }
       }
     }

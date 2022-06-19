@@ -30,11 +30,6 @@ export default [
     component: () => import('@/views/PlayList')
   },
   {
-    path: '/playlist/detail',
-    name: 'PlayListDetail',
-    component: () => import('@/views/Detail/PlayListDetail')
-  },
-  {
     path: '/artist',
     name: 'Artist',
     component: () => import('@/views/Artist')

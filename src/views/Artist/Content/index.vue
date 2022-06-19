@@ -8,7 +8,7 @@
       :key="item.id"
     >
       <!-- card body -->
-      <div class="body">
+      <div class="body" @click="goTarget(item.id)">
         <el-image
           :src="`${item.picUrl}?param=200y200`"
           fit="cover"
@@ -36,6 +36,11 @@ export default {
     ...mapState({
       artistList: (state) => state.artist.artistList
     })
+  },
+  methods: {
+    goTarget (id) {
+      this.$router.push({ path: '/artist/detail', query: { id } })
+    }
   }
 }
 </script>

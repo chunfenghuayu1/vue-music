@@ -1,7 +1,7 @@
 <template>
   <div>
       <!-- 官方榜 -->
-      <div>
+      <div v-if="officialRankList">
         <el-row>
           <el-col :span="24">
             <h1>官方榜</h1>
@@ -18,7 +18,7 @@
         </el-row>
       </div>
       <!-- 全球榜 -->
-      <div>
+      <div v-if="rankAllList">
         <el-row>
           <el-col :span="24">
             <h1>全球榜</h1>

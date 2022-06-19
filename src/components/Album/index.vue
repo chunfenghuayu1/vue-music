@@ -54,7 +54,7 @@ export default {
     // 内容跳转,点击图片或者标题,跳转到相应的歌单页面
     goTarget (id) {
       this.$router.push({
-        path: '/playlist/detail',
+        path: '/rank/detail',
         query: { id }
       })
     }
@@ -81,22 +81,21 @@ export default {
   }
   .count {
     position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    border-top-right-radius: 10px;
-    width: 60%;
-    height: 10%;
-    background: linear-gradient(
-      to right,
-      #63bbd000 0%,
-      #63bbd080 97%,
-      #63bbd080 100%
-    );
-    padding-right: 10px;
+    top: 5px;
+    right: 5px;
+    // background: linear-gradient(
+    //   to right,
+    //   #63bbd000 0%,
+    //   #63bbd080 97%,
+    //   #63bbd080 100%
+    // );
+    background-color: rgba(180, 180, 180, 0.722);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-radius: 15px;
+    padding: 3px 10px;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: center;
     i {
       font-style: normal;
       font-size: 12px;

@@ -18,7 +18,9 @@ export default class Song {
     // 是否有版权
     license,
     // 发行时间
-    publishTime
+    publishTime,
+    // 简介
+    tns
   }) {
     this.id = id
     this.name = name
@@ -31,6 +33,7 @@ export default class Song {
     this.fee = fee
     this.license = license
     this.publishTime = publishTime
+    this.tns = tns
   }
 }
 export function formatSongInfo (params) {
@@ -45,6 +48,7 @@ export function formatSongInfo (params) {
     url: `https://music.163.com/song/media/outer/url?id=${params.id}.mp3`,
     fee: params.fee,
     license: params.license,
-    publishTime: formatSong.formatMsgTime(params.publishTime)
+    publishTime: formatSong.formatMsgTime(params.publishTime),
+    tns: params.tns
   })
 }

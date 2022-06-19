@@ -30,7 +30,6 @@ export default {
         fmt = fmt.replace(ret[1], opt[k])
       }
     }
-
     return fmt
   },
   // 歌曲转毫秒格式化处理 03:30 => (3*60+30) * 1000

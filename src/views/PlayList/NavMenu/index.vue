@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-card shadow="always" :body-style="{ padding: '20px' }">
+  <div v-if="tagsList">
+    <el-card shadow="always" :body-style="{ padding: '20px' }" >
       <!-- card body -->
       <el-row :gutter="20" type="flex">
         <el-col v-for="(categories, index) in tagsList" :key="index">

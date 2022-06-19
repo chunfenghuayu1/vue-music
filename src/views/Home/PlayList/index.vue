@@ -2,7 +2,7 @@
   <el-card shadow="always" :body-style="{ padding: '20px' }">
     <div slot="header">
       <el-row>
-        <el-col :span="3" class="header-title">热门推荐</el-col>
+        <el-col :span="3" class="header-title" >热门推荐</el-col>
         <el-col :span="21" :pull="1" class="header-tip">
           <ul>
             <li v-for="(list,index) in playListTags" :key="index" :class="index==Index?'active':''" @click="changeList(index,list.name)">{{list.name}}</li>

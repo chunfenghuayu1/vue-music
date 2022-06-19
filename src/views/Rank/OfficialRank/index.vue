@@ -3,11 +3,13 @@
     <!-- card body -->
     <el-row :gutter="20" type="flex" align="middle">
       <el-col :span="8">
-        <el-image
-          :src="`${list.coverImgUrl}?param=200y200`"
-          fit="cover"
-          :lazy="true"
-        ></el-image>
+        <router-link :to="{ path: '/rank/detail', query: { id: list.id } }">
+          <el-image
+            :src="`${list.coverImgUrl}?param=200y200`"
+            fit="cover"
+            :lazy="true"
+          ></el-image>
+        </router-link>
       </el-col>
       <el-col :span="16">
         <div class="list">
@@ -22,7 +24,13 @@
                   ></span>
                   <span v-else class="el-icon-minus"></span>
                 </el-col>
-                <el-col :span="8" class="songname">{{ item.name }}</el-col>
+                <el-col :span="8" class="songname">
+                  <router-link
+                    :to="{ path: '/songdetail', query: { id: item.id } }"
+                  >
+                    {{ item.name }}
+                  </router-link>
+                </el-col>
                 <el-col :span="12" class="author" :pull="1"
                   ><span v-for="(ar, index) in item.ar" :key="index"
                     >{{ ar.name }}
@@ -32,7 +40,12 @@
             </li>
             <li>
               <el-row>
-                <el-col :span="6" class="all">查看全部 &gt;</el-col>
+                <el-col :span="6" class="all"
+                  ><router-link
+                    :to="{ path: '/rank/detail', query: { id: list.id } }"
+                    >查看全部 &gt;</router-link
+                  ></el-col
+                >
               </el-row>
             </li>
           </ul>
@@ -44,7 +57,7 @@
 
 <script>
 export default {
-  props: ['list']
+  props: ['list'],
 }
 </script>
 
@@ -101,6 +114,7 @@ export default {
   text-overflow: ellipsis;
   display: -webkit-box;
   overflow: hidden;
+  cursor: pointer;
 }
 .author {
   color: #909399;

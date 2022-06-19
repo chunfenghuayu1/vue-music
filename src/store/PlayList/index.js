@@ -25,6 +25,7 @@ const mutations = {
 const actions = {
   // 获取所有歌单标签
   async getTags (ctx) {
+    ctx.state.tags = {}
     const { data } = await reqListTags()
     if (data.code === 200) {
       ctx.commit('GETTAGS', data)
@@ -35,6 +36,7 @@ const actions = {
   },
   // 获取对应标签的歌单内容 封面 名字 标签
   async getTagList (ctx, [order, cat, limit]) {
+    ctx.state.tagList = []
     const { data } = await reqPlayListDetail(order, cat, limit)
     if (data.code === 200) {
       ctx.commit('GETTAGLIST', data)

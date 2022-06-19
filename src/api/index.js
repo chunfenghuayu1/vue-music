@@ -33,8 +33,23 @@ export const reqSongDetail = (id, timestamp = 0) => request({ url: `/song/detail
 export const reqSimiSong = (id) => request({ url: `/simi/song?id=${id}`, method: 'get' })
 // 获取歌词
 export const reqLyric = (id) => request({ url: `/lyric?id=${id}`, method: 'get' })
-// 获取评论
+// 获取歌曲评论
 export const reqComment = (id, limit) => request({ url: `/comment/music?id=${id}&limit=${limit}`, method: 'get' })
+
+// 获取榜单评论 包括排行榜和歌单
+// before: 分页参数,取上一页最后一项的 time 获取下一页数据(获取超过 5000 条评论的时候需要用到)
+// limit: 取出评论数量 , 默认为 20
+// offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*20, 其中 20 为 limit 的值
+export const reqPlayListComment = (id, limit = 20, offset = 0) => request({ url: `/comment/playlist?id=${id}&limit=${limit}&offset=${offset}`, method: 'get' })
+
+// 获取歌手热门50首歌曲
+export const reqArtistHotMusic = (id) => request({ url: `/artist/top/song?id=${id}`, method: 'get' })
+// 获取歌手简介
+export const reqArtistDesc = (id) => request({ url: `/artist/desc?id=${id}`, method: 'get' })
+// 获取歌手专辑数量封面等
+export const reqArtistDetail = (id) => request({ url: `/artist/detail?id=${id}`, method: 'get' })
+// 获取相似歌手
+export const reqArtistSimi = (id) => request({ url: `/simi/artist?id=${id}`, method: 'get' })
 
 /* ********* MV ********* */
 // 获取 mv

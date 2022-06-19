@@ -21,7 +21,10 @@ import {
   DropdownMenu,
   DropdownItem,
   Dropdown,
-  Input
+  Input,
+  Form,
+  FormItem,
+  Tag
 } from 'element-ui'
 
 Vue.use(Button)
@@ -44,6 +47,9 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Dropdown)
 Vue.use(Input)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Tag)
 
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification
