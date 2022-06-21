@@ -1,11 +1,13 @@
-import { reqSongDetail, reqSimiSong, reqComment } from '@/api'
+import { reqSongDetail, reqSimiSong, reqComment, reqLyric } from '@/api'
 import formatSong from '@/utils/formatSong'
 const state = {
   song: {},
   // 相似歌曲
   simiSong: [],
   // 评论数据
-  commentList: []
+  commentList: [],
+  // 歌词
+  lyric: []
 }
 const mutations = {
   GETSONGDETAIL (state, data) {
@@ -24,6 +26,9 @@ const mutations = {
     })
     data.comments = [...data.hotComments, ...data.comments]
     state.commentList = data
+  },
+  GETLYRIC (state, data) {
+    state.lyric = data
   }
 }
 const actions = {
@@ -48,11 +53,27 @@ const actions = {
     }
   },
   // 获取评论
-  async getCommentList (ctx, id, limit = 20) {
+  async getCommentList (ctx, id, limit = 100) {
     ctx.state.commentList = []
     if (id) {
       const { data } = await reqComment(id, limit)
       ctx.commit('GETCOMMENTLIST', data)
+    }
+  },
+  // 获取歌词
+  async getLyric (ctx, id) {
+    ctx.state.lyric = []
+    const { data } = await reqLyric(id)
+    if (data.code === 200) {
+      // console.log(data)
+      const arr = data.lrc.lyric.split('\n')
+      const newarr = []
+      arr.forEach(item => {
+        if (item) {
+          newarr.push(item.split(']')[1].trim())
+        }
+      })
+      ctx.commit('GETLYRIC', newarr)
     }
   }
 }

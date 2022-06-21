@@ -69,7 +69,7 @@ export default {
         type: '全部',
         area: '全部',
         order: '上升最快',
-        limit: 50,
+        limit: 100,
         offset: 0
       }
     }

@@ -4,7 +4,7 @@
       <div class="left">
         <div class="header">
           <!-- 歌手介绍 -->
-          <div class="avatar">
+          <div class="avatar" v-if="artist.cover">
             <el-image
               :src="`${artist.cover}?param=230y230`"
               fit="fill"
@@ -21,12 +21,21 @@
                 size="medium"
                 type="success"
                 style="margin-right: 5px"
-                v-for="(item, index) in artist.identities"
-                :key="index"
+                v-for="item in artist.identifyTag"
+                :key="item"
+                >{{ item }}</el-tag
+              >
+              <el-tag
+                effect="light"
+                size="medium"
+                type="success"
+                style="margin-right: 5px"
+                v-for="item in artist.identities"
+                :key="item"
                 >{{ item }}</el-tag
               >
             </div>
-            <div class="count" >
+            <div class="count">
               <div class="musicSize" v-if="artist.musicSize">
                 单曲数：
                 <span>{{ artist.musicSize }}</span>
@@ -40,39 +49,48 @@
             </div>
             <div class="briefDesc" v-if="artist.briefDesc">
               <p class="briefDesc-title">介绍：</p>
-              <p class="briefDesc-content" :class="toggle ? ' toggle' : ''" @click="toggle = !toggle">
+              <p
+                class="briefDesc-content"
+                :class="toggle ? 'toggle' : ''"
+                @click="toggle = !toggle"
+              >
                 {{ artist.briefDesc }}
               </p>
-              <i @click="toggle = !toggle" v-if="toggle">更多</i>
-              <i @click="toggle = !toggle" v-else>收起</i>
             </div>
           </div>
         </div>
-        <div class="body">
+        <div class="body" v-if="artistDesc.introduction">
           <div class="body-title">
             <div>
               <span :class="Index == 1 ? 'active' : ''" @click="changeActive(1)"
-              >热门50首</span
-            >
-            <span :class="Index == 2 ? 'active' : ''" @click="changeActive(2)"
-              >歌手详情</span
-            >
+                >热门50首</span
+              >
+              <span
+                :class="Index == 2 ? 'active' : ''"
+                @click="changeActive(2)"
+                v-if="artistDesc.introduction.length !== 0"
+                >歌手详情</span
+              >
             </div>
-            <div class="btn"><el-button type="primary"
-              size="small"
-              round
-              v-if="Index==1"
-              style="
-                background-color: rgb(99, 187, 208);
-                border-color: rgb(99, 187, 208);
-              " >立即播放</el-button>
+            <div class="btn">
+              <el-button
+                type="primary"
+                size="small"
+                round
+                v-if="Index == 1"
+                style="
+                  background-color: rgb(99, 187, 208);
+                  border-color: rgb(99, 187, 208);
+                "
+                >立即播放</el-button
+              >
             </div>
           </div>
           <!-- 热门50首歌曲 -->
           <div class="content1" v-if="Index == 1">
             <div class="list-form">
               <!-- 歌曲表格 -->
-              <el-table stripe style="width: 100%" :data="hotPlayList">
+              <el-table stripe style="width: 100%" :data="ListPage">
                 <el-table-column
                   type="index"
                   label="序号"
@@ -81,14 +99,32 @@
                 >
                 </el-table-column>
                 <el-table-column
-                  prop="name"
                   label="音乐标题"
                   show-overflow-tooltip
                   align="center"
-                ></el-table-column>
-                <el-table-column label="歌手" align="center" show-overflow-tooltip>
+                >
                   <template slot-scope="{ row, $index }">
-                    <span v-for="(item, index) in row.singer" :key="index">
+                    <span
+                      @click="
+                        $router.push({ path: `/songdetail?id=${row.id}` })
+                      "
+                      >{{ row.name }}</span
+                    >
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  label="歌手"
+                  align="center"
+                  show-overflow-tooltip
+                >
+                  <template slot-scope="{ row }">
+                    <span
+                      v-for="(item, index) in row.singer"
+                      :key="index"
+                      @click="
+                        $router.push({ path: `/artist/detail?id=${item.id}` })
+                      "
+                    >
                       <span v-if="index !== 0">/</span>
                       {{ item.name }}
                     </span>
@@ -99,23 +135,66 @@
                   label="时长"
                   width="80"
                 ></el-table-column>
+                <!-- 播放/添加播放列表操作 -->
+                <el-table-column label="操作" width="100" align="center">
+                  <template slot-scope="{ row }">
+                    <el-button
+                      icon="el-icon-caret-right"
+                      circle
+                      size="mini"
+                      @click="goArtist(row, 0)"
+                    ></el-button>
+                    <el-button
+                      icon="el-icon-plus"
+                      circle
+                      size="mini"
+                      @click="goArtist(row, 1)"
+                    ></el-button>
+                  </template>
+                </el-table-column>
               </el-table>
+              <!-- 分页器 -->
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :hide-on-single-page="true"
+                :total="totalPage"
+                :page-size="pageSize"
+                :current-page="currentPage"
+                align="center"
+                @current-change="handleCurrentChange"
+              >
+              </el-pagination>
             </div>
           </div>
           <!-- 歌手介绍 -->
           <div class="content2" v-else>
-            <div class="artistDesc" v-for="(item,index) in artistDesc.introduction" :key="index">
-              <h3>{{item.ti}}</h3>
-              <p v-for="(txt,index) in item.txtArr" :key="index">{{txt}}</p>
+            <div
+              class="artistDesc"
+              v-for="(item, index) in artistDesc.introduction"
+              :key="index"
+            >
+              <h3>{{ item.ti }}</h3>
+              <p v-for="(txt, index) in item.txtArr" :key="index">{{ txt }}</p>
             </div>
           </div>
         </div>
       </div>
       <div class="right">
-          <div class="card">
-            <div class="title">
-              <p>相似歌手</p>
-            <div class="content">1</div>
+        <div class="card">
+          <div class="title">
+            <p>相似歌手</p>
+          </div>
+          <div class="content">
+            <swiper :options="swiperOption">
+              <swiper-slide v-for="(item, index) in simiArtists" :key="index">
+                <img
+                  :src="`${item.picUrl}?param=120y120`"
+                  @click="goTarget(item.id)"
+                />
+              </swiper-slide>
+              <!-- <div class="swiper-pagination" slot="pagination"></div> -->
+            </swiper>
           </div>
         </div>
       </div>
@@ -126,6 +205,7 @@
 </template>
 
 <script>
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import { mapState } from 'vuex'
 export default {
   data () {
@@ -133,8 +213,28 @@ export default {
       // 用于切换热门50首和歌手详情
       Index: 1,
       // 显示更多文字
-      toggle: true
+      toggle: true,
+      // 相似歌手轮播图
+      swiperOption: {
+        // loop: true,
+        spaceBetween: 5, // 图片间距
+        autoplay: false,
+        slidesPerView: 3, // 展示几张
+        slidesPerColumn: 3,
+        grid: {
+          fill: 'column',
+          rows: 3
+        }
+      },
+      // 当前页
+      currentPage: 1,
+      // 每页多少条
+      pageSize: 10
     }
+  },
+  components: {
+    swiper,
+    swiperSlide
   },
   computed: {
     ...mapState({
@@ -142,7 +242,27 @@ export default {
       artistDesc: (state) => state.artistDetail.artistDesc,
       artist: (state) => state.artistDetail.artist,
       simiArtists: (state) => state.artistDetail.simiArtists
-    })
+    }),
+    // 计算共多少页
+    totalPage () {
+      if (this.hotPlayList) {
+        return this.hotPlayList.length
+      } else {
+        return 0
+      }
+    },
+    // 计算需要展示歌曲的数量，便于分页
+    ListPage () {
+      const { hotPlayList, currentPage, pageSize } = this
+      if (hotPlayList) {
+        return hotPlayList.slice(
+          (currentPage - 1) * pageSize,
+          currentPage * pageSize
+        )
+      } else {
+        return []
+      }
+    }
   },
   methods: {
     // 控制内容切换
@@ -154,6 +274,24 @@ export default {
       await this.$store.dispatch('getArtistSimi', id)
       await this.$store.dispatch('getArtistHotPlay', id)
       await this.$store.dispatch('getArtistDesc', id)
+    },
+    // 跳转页面
+    goTarget (id) {
+      this.$router.push({ path: '/artist/detail', query: { id } })
+      this.toggle = true
+    },
+    // 点击列表按钮
+    goArtist (item, val) {
+      // val 0表示播放 1表示添加播放列表
+      if (val === 0) {
+        // 此处播放
+      } else if (val === 1) {
+        // 此处添加到播放列表
+      }
+    },
+    // 切换分页
+    handleCurrentChange (val) {
+      this.currentPage = val
     }
   },
   watch: {
@@ -163,6 +301,7 @@ export default {
         const { id } = this.$route.query
         if (id) {
           this.getData(id)
+          this.toggle = true
         }
       }
     }
@@ -173,6 +312,7 @@ export default {
 <style lang="less" scoped>
 .main {
   display: flex;
+  width: 100%;
   .left {
     flex: 1;
     margin-right: 10px;
@@ -238,7 +378,7 @@ export default {
             color: #909399;
           }
           .toggle {
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
           }
         }
       }
@@ -280,8 +420,8 @@ export default {
           font-size: 18px;
         }
       }
-     .content2 {
-      padding: 10px;
+      .content2 {
+        padding: 10px;
         .artistDesc {
           h3 {
             font-size: 14px;
@@ -299,7 +439,7 @@ export default {
   .right {
     width: 350px;
     .card {
-      height: 500px;
+      height: 450px;
       border: 1px solid #ebeef5;
       background-color: #fff;
       overflow: hidden;
@@ -308,6 +448,24 @@ export default {
       border-radius: 10px;
       box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
       padding: 18px 20px;
+      .content {
+        .swiper-slide {
+          border-radius: 10px;
+          overflow: hidden;
+          img {
+            vertical-align: middle;
+            cursor: pointer;
+          }
+        }
+      }
+      .title {
+        margin-bottom: 20px;
+        p {
+          text-align: center;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
     }
   }
 }

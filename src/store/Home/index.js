@@ -53,6 +53,13 @@ const mutations = {
 const actions = {
   // 获取轮播图数据
   async getBanner (ctx) {
+    // 获取前清空所有数据
+    ctx.state.rankListDetail = []
+    ctx.state.bannerList = []
+    ctx.state.rankList = []
+    ctx.state.rankAllList = []
+    ctx.state.playListTags = []
+    ctx.state.playListDetail = []
     const { data } = await reqBanner()
     // console.log(data)
     if (data.code === 200) {
@@ -64,6 +71,9 @@ const actions = {
   },
   // 获取排行榜
   async getRankList (ctx) {
+    ctx.state.rankList = []
+    ctx.state.rankAllList = []
+    ctx.state.rankListDetail = []
     const { data } = await reqRankList()
     // console.log(res)
     if (data.code === 200) {
@@ -75,7 +85,6 @@ const actions = {
   },
   // 获取排行榜单详细数据
   getRankListDetail (ctx) {
-    ctx.state.rankListDetail = []
     ctx.state.rankList.forEach(async (item) => {
       const { data } = await reqRankListDetail(item.id)
       if (data.code === 200) {

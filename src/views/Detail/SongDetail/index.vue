@@ -40,12 +40,13 @@
               round
               style="background-color: #63bbd0; border-color: #63bbd0"
               :disabled="song.url ? false : true"
+              @click="playMusic"
               >立即播放</el-button
             >
             <el-button size="medium" round :disabled="song.url ? false : true"
+            @click="addMusic"
               >添加到播放列表</el-button
             >
-            <el-button size="medium" round>评论</el-button>
           </div>
         </div>
         <!-- 相似歌曲 -->
@@ -69,7 +70,8 @@
                   <span
                     v-for="(item1, index) in item.album.artists"
                     :key="index"
-                    >{{ item1.name }}</span
+                    @click="$router.push({ path: `/artist/detail?id=${item1.id}` })"
+                    ><span v-if="index!==0">/</span>{{ item1.name }}</span
                   >
                 </p>
               </div>
@@ -148,9 +150,27 @@ export default {
       immediate: true,
       handler (newval) {
         const { id } = this.$route.query
+        // 未使用异步
         this.$store.dispatch('getSongDetail', id)
         this.$store.dispatch('getSimiSong', id)
         this.$store.dispatch('getCommentList', id)
+        this.$store.dispatch('getLyric', id)
+      }
+    }
+  },
+  methods: {
+    // 立即播放歌曲按钮
+    async playMusic () {
+      await this.$store.dispatch('addMusic', this.song)
+      this.$bus.$emit('PLAYMUSIC', this.song)
+    },
+    // 添加到播放列表按钮
+    async addMusic () {
+      const res = await this.$store.dispatch('addMusic', this.song)
+      if (!res) {
+        this.$bus.$emit('ADDMUSIC', true)
+      } else {
+        this.$bus.$emit('ADDMUSIC', false)
       }
     }
   }
@@ -248,11 +268,18 @@ export default {
             }
             p:nth-child(2) {
               color: #909399;
+              -webkit-line-clamp: 1;
+              -webkit-box-orient: vertical;
+              word-break: break-all;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              overflow: hidden;
+              font-size: 14px;
             }
           }
           .right {
+            display: flex;
             p {
-              display: inline-block;
               padding: 0 5px;
               cursor: pointer;
             }

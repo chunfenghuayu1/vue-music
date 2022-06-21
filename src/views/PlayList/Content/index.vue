@@ -62,12 +62,14 @@ export default {
     // 监听最新歌单的数据，如果为空就提示
     tagList: {
       handler (newval, oldval) {
-        if (newval.playlists.length === 0) {
-          this.$notify({
-            title: '失败',
-            message: '最新歌单数据为空',
-            type: 'error'
-          })
+        if (newval.playlists) {
+          if (newval.playlists.length <= 0) {
+            this.$notify({
+              title: '失败',
+              message: '最新歌单数据为空',
+              type: 'error'
+            })
+          }
         }
       }
     },

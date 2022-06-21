@@ -4,6 +4,8 @@
     <NavMenu></NavMenu>
     <!-- 内容部分 -->
     <Content></Content>
+    <!-- 回到顶部按钮 -->
+    <el-backtop></el-backtop>
   </div>
 </template>
 
@@ -15,6 +17,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

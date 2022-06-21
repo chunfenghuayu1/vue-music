@@ -4,10 +4,11 @@
     <div class="body" v-for="item in mvList" :key="item.id">
       <div class="body-img">
         <el-image
-          :src="`${item.cover}?param=200y200`"
+          :src="`${item.cover}?param=400y100`"
           fit="cover"
           :lazy="true"
           class="img"
+          @click="goTarget(item.id)"
         ></el-image>
       </div>
       <div class="content-box">
@@ -15,7 +16,7 @@
           <span>{{ item.name }}</span>
         </div>
         <div class="content">
-          <span>{{ item.artistName }}</span>
+          <span class="aritst" @click="goArtist(item.artistId)">{{ item.artistName }}</span>
         </div>
         <div class="content">
           <span
@@ -35,6 +36,14 @@ export default {
     ...mapState({
       mvList: (state) => state.mv.mvList
     })
+  },
+  methods: {
+    goTarget (id) {
+      this.$router.push({ path: '/mv/detail', query: { id } })
+    },
+    goArtist (id) {
+      this.$router.push({ path: '/artist/detail', query: { id } })
+    }
   }
 }
 </script>
@@ -47,33 +56,39 @@ export default {
   //定义列宽
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 0 10px;
-}
-.img {
-  position: relative;
-  width: 100%;
-  height: 150px;
-  border-radius: 10px;
-  overflow: hidden;
-  vertical-align: middle;
-}
-
-.title {
-  font-size: 16px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  word-break: break-all;
-  span {
-    cursor: pointer;
+  .body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .body-img {
+      .img {
+        width: 100%;
+        position: relative;
+        height: 150px;
+        border-radius: 10px;
+        overflow: hidden;
+        vertical-align: middle;
+      }
+    }
+    .content-box {
+      padding: 10px 0;
+      .title {
+        font-size: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+      }
+      .content {
+        font-size: 14px;
+        color: #909399;
+        .aritst {
+          cursor: pointer;
+        }
+      }
+    }
   }
-}
-.content-box {
-  padding: 10px 0;
-}
-.content {
-  font-size: 14px;
-  color: #909399;
 }
 </style>

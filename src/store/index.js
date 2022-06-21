@@ -7,6 +7,7 @@ import mv from './Mv'
 import songDetail from './SongDetail'
 import rankListDetail from './RankListDetail'
 import artistDetail from './ArtistDetail'
+import playBar from './PlayBar'
 
 Vue.use(Vuex)
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     mv,
     songDetail,
     rankListDetail,
-    artistDetail
+    artistDetail,
+    playBar
   }
 })

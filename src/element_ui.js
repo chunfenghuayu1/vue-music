@@ -24,7 +24,11 @@ import {
   Input,
   Form,
   FormItem,
-  Tag
+  Tag,
+  Pagination,
+  Slider,
+  Popover,
+  Tooltip
 } from 'element-ui'
 
 Vue.use(Button)
@@ -50,6 +54,10 @@ Vue.use(Input)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Tag)
+Vue.use(Pagination)
+Vue.use(Slider)
+Vue.use(Popover)
+Vue.use(Tooltip)
 
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification

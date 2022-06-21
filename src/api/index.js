@@ -40,7 +40,7 @@ export const reqComment = (id, limit) => request({ url: `/comment/music?id=${id}
 // before: 分页参数,取上一页最后一项的 time 获取下一页数据(获取超过 5000 条评论的时候需要用到)
 // limit: 取出评论数量 , 默认为 20
 // offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*20, 其中 20 为 limit 的值
-export const reqPlayListComment = (id, limit = 20, offset = 0) => request({ url: `/comment/playlist?id=${id}&limit=${limit}&offset=${offset}`, method: 'get' })
+export const reqPlayListComment = (id, limit = 100, offset = 0) => request({ url: `/comment/playlist?id=${id}&limit=${limit}&offset=${offset}`, method: 'get' })
 
 // 获取歌手热门50首歌曲
 export const reqArtistHotMusic = (id) => request({ url: `/artist/top/song?id=${id}`, method: 'get' })
@@ -52,15 +52,16 @@ export const reqArtistDetail = (id) => request({ url: `/artist/detail?id=${id}`,
 export const reqArtistSimi = (id) => request({ url: `/simi/artist?id=${id}`, method: 'get' })
 
 /* ********* MV ********* */
-// 获取 mv
+// 获取 全部mv
 export const reqMv = ({ area = '', type = '', order = '', limit = 50, offset = 0 }) => request({ url: `/mv/all?area=${area}&type=${type}&order=${order}&limit=${limit}&offset=${offset}`, method: 'get' })
 // 获取 mv详情
-export const mvDetail = ({ id = '' }) => request({ url: `/mv/detail?mvid=${id}`, method: 'get' })
+export const mvDetail = (id = '') => request({ url: `/mv/detail?mvid=${id}`, method: 'get' })
 // 获取 地址
-export const mvUrl = ({ id = '', r = 1080 }) => request({ url: `/mv/url?id=${id}&r=${r}`, method: 'get' })
+export const mvUrl = (id = '', r = 1080) => request({ url: `/mv/url?id=${id}&r=${r}`, method: 'get' })
 
 // 获取mv评论
-export const commentMv = ({ id = '', limit = 20, offset = 0, before = 0, timestamp = 0 }) => request({ url: `/comment/mv?id=${id}&limit=${limit}&offset=${offset}&before=${before}&timestamp=${timestamp}`, method: 'get' })
+// , offset = 0, before = 0, timestamp = 0
+export const commentMv = (id = '', limit = 100) => request({ url: `/comment/mv?id=${id}&limit=${limit}`, method: 'get' })
 
 // 相似mv
-export const simiMv = ({ id = '' }) => request({ url: `/simi/mv?mvid=${id}`, method: 'get' })
+export const simiMv = (id) => request({ url: `/simi/mv?mvid=${id}`, method: 'get' })

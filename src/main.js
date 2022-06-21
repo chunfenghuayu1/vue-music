@@ -8,8 +8,11 @@ import './assets/style/reset.css'
 import '@/assets/style/iconfont.css'
 // 引入element组件
 import './element_ui'
+import 'swiper/dist/css/swiper.css'
+
 // 全局挂载aixios
 import * as API from './api'
+
 Vue.prototype.$http = API
 // bus传递参数
 Vue.prototype.$bus = new Vue()
@@ -19,5 +22,9 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  beforeCreate () {
+    // 全局事件总线$bus配置
+    Vue.prototype.$bus = this
+  }
 }).$mount('#app')

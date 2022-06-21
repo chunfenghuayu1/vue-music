@@ -45,3 +45,6 @@ p {
 .el-icon-caret-top {
   color: #606266;
 }
+.el-backtop {
+  bottom:100px!important;
+}

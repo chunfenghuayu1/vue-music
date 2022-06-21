@@ -6,48 +6,21 @@
     <!-- card body -->
     <div class="body">
       <div class="lyrics">
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
-        <p>1111111</p>
+        <p v-for="(item,index) in lyric" :key="index">{{item}}</p>
       </div>
     </div>
   </el-card>
 </template>
 
 <script>
-export default {}
+import { mapState } from 'vuex'
+export default {
+  computed: {
+    ...mapState({
+      lyric: state => state.songDetail.lyric
+    })
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -73,6 +46,13 @@ span::before {
   overflow-y: auto;
   &::-webkit-scrollbar {
     display: none; /*隐藏滚动条*/
+  }
+  .lyrics {
+    p {
+      font-size: 14px;
+      color: #909399;
+      line-height: 30px;
+    }
   }
 }
 </style>

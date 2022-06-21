@@ -31,11 +31,12 @@
                     {{ item.name }}
                   </router-link>
                 </el-col>
-                <el-col :span="12" class="author" :pull="1"
-                  ><span v-for="(ar, index) in item.ar" :key="index"
-                    >{{ ar.name }}
-                  </span></el-col
-                >
+                <el-col :span="12" class="author" :pull="1">
+                  <span v-for="(ar, index) in item.ar" :key="index" @click="goTarget(ar.id)">
+                  <span v-if="index!==0">/</span>
+                  {{ ar.name }}
+                  </span>
+                </el-col>
               </el-row>
             </li>
             <li>
@@ -58,6 +59,11 @@
 <script>
 export default {
   props: ['list'],
+  methods: {
+    goTarget (id) {
+      this.$router.push({ path: '/artist/detail', query: { id } })
+    }
+  }
 }
 </script>
 

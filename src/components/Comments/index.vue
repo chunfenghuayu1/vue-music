@@ -2,7 +2,9 @@
   <!-- 评论 -->
   <div class="comment">
     <div class="header">
-      <h2>评论<em>共{{list.total}}条评论</em></h2>
+      <h2>
+        评论<em>共{{ list.total }}条评论(只获取前100条)</em>
+      </h2>
     </div>
     <!-- 输入文本框 -->
     <div class="textarea">
@@ -29,22 +31,47 @@
       >
     </div>
     <!-- 评论区 -->
-    <div class="comment-area">
-      <div class="comment-item" v-for="item in list.comments" :key="item.commentId">
+    <div class="comment-area" ref="comment">
+      <div
+        class="comment-item"
+        v-for="(item, index) in showList"
+        :key="index"
+      >
         <div class="left">
           <img :src="`${item.user.avatarUrl}?param=50y50`" />
         </div>
         <div class="right">
-          <p class="username">{{item.user.nickname}}</p>
-          <p class="text">{{item.content}}</p>
+          <p class="username">{{ item.user.nickname }}</p>
+          <p class="text">{{ item.content }}</p>
           <!-- 回复的评论 需要按需展示 -->
-          <div class="comment-reply" v-for="reply in item.beReplied" :key="reply.beRepliedCommentId"><span>{{reply.user.nickname}}:</span>{{reply.content}}</div>
+          <div
+            class="comment-reply"
+            v-for="reply in item.beReplied"
+            :key="reply.beRepliedCommentId"
+          >
+            <span>{{ reply.user.nickname }}:</span>{{ reply.content }}
+          </div>
           <div class="foot">
-            <span class="time">{{item.time1}} {{item.timeStr}}</span>
-            <span class="tips el-icon-star-off">({{item.likedCount}}) <i class="el-icon-chat-dot-square"></i></span>
+            <span class="time">{{ item.timeStr }}</span>
+            <span class="tips el-icon-star-off"
+              >({{ item.likedCount }}) <i class="el-icon-chat-dot-square"></i
+            ></span>
           </div>
         </div>
       </div>
+      <!-- 分页器 -->
+      <el-pagination
+      style="margin-top: 20px; text-align: center;"
+        :small="small"
+        background
+        layout="prev, pager, next"
+        :hide-on-single-page="true"
+        :total="totalPage"
+        :page-size="pageSize"
+        :current-page="currentPage"
+        @current-change="handleCurrentChange"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -53,10 +80,54 @@
 export default {
   data () {
     return {
-      textarea: ''
+      textarea: '',
+      // 当前页
+      currentPage: 1,
+      // 每页多少条
+      pageSize: 10,
+      // 获取ref的宽度
+      commentWidth: 0
     }
   },
-  props: ['list']
+  props: ['list'],
+  methods: {
+    // 切换分页
+    handleCurrentChange (val) {
+      this.currentPage = val
+    }
+  },
+  computed: {
+    // 计算共多少页
+    totalPage () {
+      if (this.list.comments) {
+        return this.list.comments.length
+      } else {
+        return 0
+      }
+    },
+    // 计算需要展示的内容数
+    showList () {
+      const { list, currentPage, pageSize } = this
+      if (list.comments) {
+        return list.comments.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+      } else {
+        return []
+      }
+    },
+    // 计算容器宽度，确定分页器大小
+    small () {
+      const { commentWidth } = this
+      if (commentWidth > 500) {
+        return false
+      } else {
+        return true
+      }
+    }
+  },
+  mounted () {
+    // 获取ref的宽度
+    this.commentWidth = this.$refs.comment.offsetWidth
+  }
 }
 </script>
 
@@ -79,6 +150,7 @@ export default {
     margin-top: 20px;
     .comment-item {
       display: flex;
+      max-width: 100%;
       border: 1px solid #ebeef5;
       background-color: #fff;
       overflow: hidden;
@@ -102,6 +174,7 @@ export default {
         }
       }
       .right {
+        width: 80%;
         flex: 1;
         font-size: 14px;
         .username {
@@ -110,6 +183,7 @@ export default {
         }
         .text {
           padding-bottom: 10px;
+          overflow: hidden;
         }
         // 回复的评论
         .comment-reply {

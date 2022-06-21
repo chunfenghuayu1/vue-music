@@ -16,7 +16,6 @@
 <script>
 // 引入插件
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -107,7 +106,9 @@ export default {
       text-align: center;
       font-size: 14px;
       color: #fff;
-      background-color: #63bbd0;
+      // background-color: #63bbd0;
+      background-color: rgba(180, 180, 180, 0.722);
+      backdrop-filter: saturate(180%) blur(20px);
     }
   }
   .swiper-pagination {

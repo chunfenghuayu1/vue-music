@@ -42,18 +42,20 @@
           </div>
           <div class="forth" v-if="detailList.playlist">
             <p class="briefDesc-title">歌单简介</p>
-            <p class="briefDesc-content" :class="toggle ? ' toggle' : ''" @click="toggle = !toggle">
+            <p
+              class="briefDesc-content"
+              :class="toggle ? ' toggle' : ''"
+              @click="toggle = !toggle"
+            >
               {{ detailList.playlist.description }}
             </p>
-            <i @click="toggle = !toggle" v-if="toggle">更多</i>
-            <i @click="toggle = !toggle" v-else>收起</i>
           </div>
         </div>
       </div>
       <div class="list">
         <div class="list-header">
           <p v-if="songsDetailList">
-            歌曲列表<em>共{{ songsDetailList.length }}首歌</em>
+            歌曲列表<em>共{{ totalPage }}首歌</em>
           </p>
           <div>
             <el-button
@@ -73,7 +75,7 @@
         </div>
         <div class="list-form">
           <!-- 歌曲表格 -->
-          <el-table stripe style="width: 100%" :data="songsDetailList">
+          <el-table stripe style="width: 100%" :data="songsDetailListPage">
             <el-table-column
               type="index"
               label="序号"
@@ -82,25 +84,58 @@
             >
             </el-table-column>
             <el-table-column
-              prop="name"
               label="音乐标题"
               show-overflow-tooltip
-            ></el-table-column>
+            >
+            <template slot-scope="{row}">
+              <span @click="$router.push({path:`/songdetail?id=${row.id}`})">{{row.name}}</span>
+            </template>
+            </el-table-column>
             <el-table-column label="歌手" show-overflow-tooltip>
-              <template slot-scope="{ row, $index }">
-                <span v-for="(item, index) in row.singer" :key="index">
+              <template slot-scope="{ row }">
+                <span v-for="(item, index) in row.singer" :key="index" @click="$router.push({path:`/artist/detail?id=${item.id}`})">
                   <span v-if="index !== 0">/</span>
                   {{ item.name }}
                 </span>
               </template>
             </el-table-column>
-            <el-table-column prop="album.name" label="专辑"></el-table-column>
+            <el-table-column prop="album.name" label="专辑" show-overflow-tooltip></el-table-column>
             <el-table-column
               prop="dt"
               label="时长"
               width="80"
             ></el-table-column>
+            <!-- 播放/添加播放列表操作 -->
+            <el-table-column label="操作" width="100" align="center">
+              <template slot-scope="{ row, $index }">
+                <el-button
+                  icon="el-icon-caret-right"
+                  circle
+                  size="mini"
+                  @click="goArtist(row, 0)"
+                ></el-button>
+                <el-button
+                  icon="el-icon-plus"
+                  circle
+                  size="mini"
+                  @click="goArtist(row, 1)"
+                ></el-button>
+              </template>
+            </el-table-column>
           </el-table>
+          <!-- 分页器 -->
+          <el-pagination
+          style="margin-top: 20px;"
+          background
+          layout="prev, pager, next"
+          :hide-on-single-page="true"
+          :total="totalPage"
+          :page-size="pageSize"
+          :current-page="currentPage"
+          align="center"
+          @current-change="handleCurrentChange"
+          >
+          </el-pagination>
         </div>
       </div>
     </div>
@@ -116,11 +151,15 @@
 
 <script>
 import Comments from '@/components/Comments/index.vue'
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      toggle: true
+      toggle: true,
+      // 当前页
+      currentPage: 1,
+      // 每页多少条
+      pageSize: 10
     }
   },
   components: {
@@ -131,7 +170,26 @@ export default {
       commentList: (state) => state.rankListDetail.commentList,
       detailList: (state) => state.rankListDetail.rankDetailList1
     }),
-    ...mapGetters(['songsDetailList'])
+    songsDetailList () {
+      return this.$store.getters.songsDetailList
+    },
+    // 计算需要展示歌曲的数量，便于分页
+    songsDetailListPage () {
+      const { songsDetailList, currentPage, pageSize } = this
+      if (songsDetailList) {
+        return songsDetailList.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+      } else {
+        return []
+      }
+    },
+    // 计算共多少页
+    totalPage () {
+      if (this.songsDetailList) {
+        return this.songsDetailList.length
+      } else {
+        return 0
+      }
+    }
   },
   watch: {
     $route: {
@@ -139,10 +197,27 @@ export default {
       handler (newval) {
         const { id } = this.$route.query
         if (id) {
+          this.toggle = true
+          // 不采用异步，一起获取数据
           this.$store.dispatch('getRankListDetail', id)
           this.$store.dispatch('getRankListComment', id)
         }
       }
+    }
+  },
+  methods: {
+    // 点击列表按钮
+    goArtist (item, val) {
+      // val 0表示播放 1表示添加播放列表
+      if (val === 0) {
+        // 此处播放
+      } else if (val === 1) {
+        // 此处添加到播放列表
+      }
+    },
+    // 切换分页
+    handleCurrentChange (val) {
+      this.currentPage = val
     }
   }
 }
@@ -220,7 +295,7 @@ export default {
           font-size: 14px;
           .briefDesc-title {
             font-weight: bold;
-            margin: 10px 0;
+            margin: 30px 0 10px 0;
           }
           .briefDesc-content {
             color: #909399;
@@ -239,7 +314,7 @@ export default {
             color: #909399;
           }
           .toggle {
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 4;
           }
         }
       }

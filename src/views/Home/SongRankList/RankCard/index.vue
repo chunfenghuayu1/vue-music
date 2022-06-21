@@ -31,11 +31,9 @@
               {{ item.name }}
             </router-link>
             <!-- <a v-for="artist in item.ar" :key="artist.id">{{artist.name}}</a> -->
-            <a
-              ><i v-for="artist in item.ar" :key="artist.id"
-                >{{ artist.name }}
-              </i></a
-            >
+            <a>
+              <i v-for="(artist,index) in item.ar" :key="artist.id" @click="goTarget(artist.id)"><i v-if="index!==0">/</i>{{ artist.name }}</i>
+            </a>
           </div>
         </li>
       </ul>
@@ -57,6 +55,11 @@ export default {
   computed: {
     updateTime () {
       return formartDate(this.list.updateTime, 'MM月dd日HH时mm分')
+    }
+  },
+  methods: {
+    goTarget (id) {
+      this.$router.push({ path: '/artist/detail', query: { id } })
     }
   }
 }

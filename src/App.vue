@@ -15,16 +15,20 @@
         </el-main>
       </el-container>
     </el-container>
+    <!-- 播放器 -->
+    <AudiopPlayer></AudiopPlayer>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header'
 import Aside from '@/components/Aside'
+import AudiopPlayer from './components/AudiopPlayer/index.vue'
 export default {
   components: {
     Header,
-    Aside
+    Aside,
+    AudiopPlayer
   }
 }
 </script>
