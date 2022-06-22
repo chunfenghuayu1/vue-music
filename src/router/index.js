@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -22,7 +23,14 @@ router.beforeEach((to, from, next) => {
   // } else {
   //   next()
   // }
-  next()
+  // 判断是否有token
+  const token = store.state.login.token
+  // 此处暂时不进行拦截
+  if (token) {
+    next()
+  } else {
+    next()
+  }
 })
 
 export default router

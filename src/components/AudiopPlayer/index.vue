@@ -309,6 +309,7 @@
       <audio
         :src="source.url"
         ref="audio"
+        @ended="nextPlay"
         @timeupdate="audioUpdateTime"
       ></audio>
     </div>
@@ -476,6 +477,7 @@ export default {
     removeList () {
       // 向删除歌曲传id=-1
       this.$store.dispatch('removeSong', -1)
+      this.$refs.audio.load()
     },
     // 下一曲
     nextMusic () {
@@ -498,6 +500,10 @@ export default {
         this.source = this.musicList[index - 1]
       }
       this.playOrParse(false)
+    },
+    // 当前歌曲播放完毕,按顺序播放
+    nextPlay () {
+      this.nextMusic()
     }
   },
   computed: {
@@ -514,6 +520,13 @@ export default {
           const audio = this.$refs.audio
           audio.volume = newval / 100
         })
+      }
+    },
+    source: {
+      handler (newval) {
+        if (newval.license) {
+          this.$message.error('无法播放')
+        }
       }
     }
   }

@@ -39,12 +39,12 @@
               size="medium"
               round
               style="background-color: #63bbd0; border-color: #63bbd0"
-              :disabled="song.url ? false : true"
-              @click="playMusic"
+              :disabled="song.license ? true : false"
+              @click="playMusic(song)"
               >立即播放</el-button
             >
-            <el-button size="medium" round :disabled="song.url ? false : true"
-            @click="addMusic"
+            <el-button size="medium" round :disabled="song.license ? true : false"
+            @click="addMusic(song)"
               >添加到播放列表</el-button
             >
           </div>
@@ -75,8 +75,8 @@
                   >
                 </p>
               </div>
-              <div class="right">
-                <p>
+              <!-- <div class="right">
+                <p @click="playMusic(item)">
                   <svg
                     t="1655560663748"
                     class="icon"
@@ -94,7 +94,7 @@
                     ></path>
                   </svg>
                 </p>
-                <p>
+                <p @click="addMusic(item)">
                   <svg
                     t="1655560726449"
                     class="icon"
@@ -111,7 +111,7 @@
                     ></path>
                   </svg>
                 </p>
-              </div>
+              </div> -->
             </div>
           </el-card>
         </div>
@@ -160,13 +160,13 @@ export default {
   },
   methods: {
     // 立即播放歌曲按钮
-    async playMusic () {
-      await this.$store.dispatch('addMusic', this.song)
-      this.$bus.$emit('PLAYMUSIC', this.song)
+    async playMusic (song) {
+      await this.$store.dispatch('addMusic', song)
+      this.$bus.$emit('PLAYMUSIC', song)
     },
     // 添加到播放列表按钮
-    async addMusic () {
-      const res = await this.$store.dispatch('addMusic', this.song)
+    async addMusic (song) {
+      const res = await this.$store.dispatch('addMusic', song)
       if (!res) {
         this.$bus.$emit('ADDMUSIC', true)
       } else {
@@ -180,6 +180,7 @@ export default {
 <style lang="less" scoped>
 .container {
   display: flex;
+  margin-bottom: 50px;
   .main {
     flex: 1;
 
@@ -237,11 +238,11 @@ export default {
               border-radius: 50%;
               // animation: rotate1 10s linear infinite;
             }
-            @keyframes rotate1 {
-              100% {
-                transform: rotate(360deg);
-              }
-            }
+            // @keyframes rotate1 {
+            //   100% {
+            //     transform: rotate(360deg);
+            //   }
+            // }
           }
         }
         .btn {
@@ -277,13 +278,13 @@ export default {
               font-size: 14px;
             }
           }
-          .right {
-            display: flex;
-            p {
-              padding: 0 5px;
-              cursor: pointer;
-            }
-          }
+          // .right {
+          //   display: flex;
+          //   p {
+          //     padding: 0 5px;
+          //     cursor: pointer;
+          //   }
+          // }
         }
       }
     }

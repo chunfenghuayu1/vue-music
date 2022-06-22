@@ -5,7 +5,7 @@
         <el-image
           :src="`${item.coverImgUrl}?param=250y250`"
           fit="cover"
-          :lazy="true"
+          lazy
           @click="goTarget(item.id)"
         ></el-image>
         <p class="count">

@@ -8,6 +8,7 @@ import songDetail from './SongDetail'
 import rankListDetail from './RankListDetail'
 import artistDetail from './ArtistDetail'
 import playBar from './PlayBar'
+import login from './Login'
 
 Vue.use(Vuex)
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     songDetail,
     rankListDetail,
     artistDetail,
-    playBar
+    playBar,
+    login
   }
 })

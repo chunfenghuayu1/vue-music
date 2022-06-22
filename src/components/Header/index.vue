@@ -50,41 +50,36 @@
         </svg>
       </router-link>
     </el-col>
-    <el-col :span="18" class="middle-content">
-      <el-col :span="3">
-        <el-button
-          icon="el-icon-arrow-left"
-          size="mini"
-          @click="$router.go(-1)"
-          circle
-        ></el-button>
-        <el-button
-          icon="el-icon-arrow-right"
-          size="mini"
-          @click="$router.go(1)"
-          circle
-        ></el-button>
-      </el-col>
-      <el-col :span="18">
-        <Search></Search>
-      </el-col>
-      <el-col :span="3">
-        <el-avatar
-          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          style="verticalAlign: middle;"
-        ></el-avatar>
-        <span style="marginLeft:20px;cursor: pointer;" v-if="true">登录</span>
-        <span style="marginLeft:20px;cursor: pointer;" v-else>退出登录</span>
-      </el-col>
+    <el-col :span="4">
+      <el-button
+        icon="el-icon-arrow-left"
+        size="mini"
+        @click="$router.go(-1)"
+        circle
+      ></el-button>
+      <el-button
+        icon="el-icon-arrow-right"
+        size="mini"
+        @click="$router.go(1)"
+        circle
+      ></el-button>
     </el-col>
+    <el-col :span="10">
+        <Search></Search>
+    </el-col>
+    <el-col :span="7">
+        <Login></Login>
+      </el-col>
   </el-row>
 </template>
 
 <script>
 import Search from './Search'
+import Login from '@/components/Login'
 export default {
   components: {
-    Search
+    Search,
+    Login
   }
 }
 </script>
@@ -92,12 +87,5 @@ export default {
 <style lang="less" scoped>
 .el-row {
   height: 100%;
-}
-// .el-button {
-//   background-color: #909399;
-// }
-.middle-content {
-  height: 100%;
-  line-height: 80px;
 }
 </style>

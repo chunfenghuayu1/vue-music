@@ -66,6 +66,7 @@
                 background-color: rgb(99, 187, 208);
                 border-color: rgb(99, 187, 208);
               "
+              @click="playMusic(songsDetailListPage)"
               ><i class="el-icon-caret-right"></i>播放全部</el-button
             >
             <el-button size="small" round
@@ -88,12 +89,12 @@
               show-overflow-tooltip
             >
             <template slot-scope="{row}">
-              <span @click="$router.push({path:`/songdetail?id=${row.id}`})">{{row.name}}</span>
+              <span @click="$router.push({path:`/songdetail?id=${row.id}`})" style="cursor:pointer;">{{row.name}}</span>
             </template>
             </el-table-column>
-            <el-table-column label="歌手" show-overflow-tooltip>
+            <el-table-column label="歌手">
               <template slot-scope="{ row }">
-                <span v-for="(item, index) in row.singer" :key="index" @click="$router.push({path:`/artist/detail?id=${item.id}`})">
+                <span v-for="(item, index) in row.singer" :key="index" @click="$router.push({path:`/artist/detail?id=${item.id}`})" style="cursor:pointer;">
                   <span v-if="index !== 0">/</span>
                   {{ item.name }}
                 </span>
@@ -207,17 +208,39 @@ export default {
   },
   methods: {
     // 点击列表按钮
-    goArtist (item, val) {
+    // 点击列表按钮
+    async goArtist (item, val) {
       // val 0表示播放 1表示添加播放列表
       if (val === 0) {
         // 此处播放
+        await this.$store.dispatch('addMusic', item)
+        this.$bus.$emit('PLAYMUSIC', item)
       } else if (val === 1) {
         // 此处添加到播放列表
+        const res = await this.$store.dispatch('addMusic', item)
+        if (!res) {
+          this.$bus.$emit('ADDMUSIC', true)
+        } else {
+          this.$bus.$emit('ADDMUSIC', false)
+        }
       }
     },
     // 切换分页
     handleCurrentChange (val) {
       this.currentPage = val
+    },
+    // 播放本页全部歌曲
+    // 立即播放按钮
+    playMusic (ListPage) {
+      // 翻转数组 进行添加
+      const list = []
+      for (let i = ListPage.length - 1; i >= 0; i--) {
+        list.push(ListPage[i])
+      }
+      list.forEach(async item => {
+        await this.$store.dispatch('addMusic', item)
+      })
+      this.$bus.$emit('PLAYMUSIC', ListPage[0])
     }
   }
 }
@@ -226,6 +249,7 @@ export default {
 <style lang="less" scoped>
 .main {
   display: flex;
+   margin-bottom: 50px;
   .left {
     flex: 1;
     margin-right: 10px;

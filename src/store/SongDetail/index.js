@@ -18,6 +18,9 @@ const mutations = {
     state.song = songList
   },
   GETSIMISONG (state, data) {
+    data.songs.forEach(item => {
+      item.url = item.mp3Url
+    })
     state.simiSong = data.songs
   },
   GETCOMMENTLIST (state, data) {

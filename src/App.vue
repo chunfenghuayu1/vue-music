@@ -17,6 +17,7 @@
     </el-container>
     <!-- 播放器 -->
     <AudiopPlayer></AudiopPlayer>
+    <LoginDialog v-if="dialogVisible"></LoginDialog>
   </div>
 </template>
 
@@ -24,11 +25,19 @@
 import Header from '@/components/Header'
 import Aside from '@/components/Aside'
 import AudiopPlayer from './components/AudiopPlayer/index.vue'
+import LoginDialog from './components/Login/LoginDialog.vue'
+import { mapState } from 'vuex'
 export default {
   components: {
     Header,
     Aside,
-    AudiopPlayer
+    AudiopPlayer,
+    LoginDialog
+  },
+  computed: {
+    ...mapState({
+      dialogVisible: state => state.login.dialogVisible
+    })
   }
 }
 </script>

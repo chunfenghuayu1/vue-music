@@ -9,7 +9,6 @@ import {
   Icon,
   Col,
   Row,
-  Autocomplete,
   Avatar,
   Scrollbar,
   Card,
@@ -28,7 +27,11 @@ import {
   Pagination,
   Slider,
   Popover,
-  Tooltip
+  Tooltip,
+  Select,
+  Option,
+  OptionGroup,
+  Dialog
 } from 'element-ui'
 
 Vue.use(Button)
@@ -40,7 +43,6 @@ Vue.use(Backtop)
 Vue.use(Icon)
 Vue.use(Row)
 Vue.use(Col)
-Vue.use(Autocomplete)
 Vue.use(Avatar)
 Vue.use(Scrollbar)
 Vue.use(Card)
@@ -58,6 +60,10 @@ Vue.use(Pagination)
 Vue.use(Slider)
 Vue.use(Popover)
 Vue.use(Tooltip)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(OptionGroup)
+Vue.use(Dialog)
 
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification

@@ -12,7 +12,7 @@
         type="textarea"
         :rows="4"
         placeholder="期待你的评论......"
-        v-model="textarea"
+        v-model.trim="textarea"
         maxlength="140"
         show-word-limit
         resize="none"
@@ -27,6 +27,7 @@
           border-color: #63bbd0;
           margin-top: 10px; ;
         "
+        @click="submitCom(textarea)"
         >评论</el-button
       >
     </div>
@@ -94,6 +95,26 @@ export default {
     // 切换分页
     handleCurrentChange (val) {
       this.currentPage = val
+    },
+    // 发表评论
+    async submitCom (textarea) {
+      const flag = this.$store.state.login.isLogin
+      if (flag) {
+        const obj = {
+          t: 1,
+          type: this.type,
+          id: this.$route.query.id,
+          content: textarea
+        }
+        const { data } = await this.$http.comment(obj)
+        console.log(data)
+        if (data.code === 200) {
+          this.$message.success(`评论成功,评价内容:${data.comment.content}`)
+          this.textarea = ''
+        }
+      } else {
+        this.$store.commit('dialogVisible', true)
+      }
     }
   },
   computed: {
@@ -122,6 +143,20 @@ export default {
       } else {
         return true
       }
+    },
+    // 计算当前页的类型
+    // type 0: 歌曲 1: mv 2: 歌单
+    type () {
+      const { path } = this.$route
+      if (path === '/songdetail') {
+        return 0
+      } else if (path === '/rank/detail') {
+        return 2
+      } else if (path === '/mv/detail') {
+        return 1
+      } else {
+        return -1
+      }
     }
   },
   mounted () {
@@ -129,6 +164,7 @@ export default {
     this.commentWidth = this.$refs.comment.offsetWidth
   }
 }
+
 </script>
 
 <style lang="less" scoped>

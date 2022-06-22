@@ -92,6 +92,7 @@ export default {
 <style lang="less" scoped>
 .container {
   display: flex;
+   margin-bottom: 50px;
   .left {
     flex: 1;
     margin-right: 20px;
