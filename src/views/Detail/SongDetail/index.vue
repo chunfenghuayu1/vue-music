@@ -129,14 +129,12 @@
 </template>
 
 <script>
-import Lyric from '@/components/Lyric'
-import Comments from '@/components/Comments'
 import { mapState } from 'vuex'
 
 export default {
   components: {
-    Lyric,
-    Comments
+    Lyric: () => import('@/components/Lyric'),
+    Comments: () => import('@/components/Comments')
   },
   computed: {
     ...mapState({

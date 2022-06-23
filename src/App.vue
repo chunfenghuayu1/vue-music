@@ -24,15 +24,14 @@
 <script>
 import Header from '@/components/Header'
 import Aside from '@/components/Aside'
-import AudiopPlayer from './components/AudiopPlayer/index.vue'
-import LoginDialog from './components/Login/LoginDialog.vue'
+
 import { mapState } from 'vuex'
 export default {
   components: {
     Header,
     Aside,
-    AudiopPlayer,
-    LoginDialog
+    AudiopPlayer: () => import('./components/AudiopPlayer/index.vue'),
+    LoginDialog: () => import('@/components/Login/LoginDialog.vue')
   },
   computed: {
     ...mapState({
@@ -72,6 +71,7 @@ export default {
   color: #333;
   margin-top: 90px;
   margin-left: 220px;
+  margin-bottom: 30px;
 }
 /* 过渡动画 */
 .fade-enter-active {

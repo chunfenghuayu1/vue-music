@@ -107,7 +107,7 @@ export default {
           content: textarea
         }
         const { data } = await this.$http.comment(obj)
-        console.log(data)
+        // console.log(data)
         if (data.code === 200) {
           this.$message.success(`评论成功,评价内容:${data.comment.content}`)
           this.textarea = ''

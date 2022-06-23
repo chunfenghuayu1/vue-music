@@ -140,7 +140,8 @@
                 <!-- 播放/添加播放列表操作 -->
                 <el-table-column label="操作" width="100" align="center">
                   <template slot-scope="{ row }">
-                    <el-button
+                    <div v-if="!row.license">
+                      <el-button
                       icon="el-icon-caret-right"
                       circle
                       size="mini"
@@ -152,6 +153,7 @@
                       size="mini"
                       @click="goArtist(row, 1)"
                     ></el-button>
+                    </div>
                   </template>
                 </el-table-column>
               </el-table>
@@ -271,11 +273,11 @@ export default {
     changeActive (index) {
       this.Index = index
     },
-    async getData (id) {
-      await this.$store.dispatch('getArtistDetail', id)
-      await this.$store.dispatch('getArtistSimi', id)
-      await this.$store.dispatch('getArtistHotPlay', id)
-      await this.$store.dispatch('getArtistDesc', id)
+    getData (id) {
+      this.$store.dispatch('getArtistDetail', id)
+      this.$store.dispatch('getArtistSimi', id)
+      this.$store.dispatch('getArtistHotPlay', id)
+      this.$store.dispatch('getArtistDesc', id)
     },
     // 跳转页面
     goTarget (id) {

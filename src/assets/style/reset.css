@@ -3,6 +3,9 @@ body,html {
   margin: 0;
   box-sizing: border-box;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 body {
   background-color: #fafafa;
   height: 100%;

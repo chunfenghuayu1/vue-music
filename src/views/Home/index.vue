@@ -33,7 +33,7 @@ export default {
         await this.$store.dispatch('getRankList')
         // 获取排行榜单具体数据
         await this.$store.dispatch('getRankListDetail')
-        await this.$notify({
+        this.$notify({
           title: '成功',
           message: '首页、排行榜数据加载完成',
           type: 'success'

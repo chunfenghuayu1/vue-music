@@ -52,15 +52,12 @@ export default {
     getTarget (type, id) {
       // type 1新歌首发 1000歌单 10新碟
       // console.log(type, id)
-      switch (type) {
-        case 1:
-          this.$router.push({ path: '/songdetail', query: { id } })
-          break
-        case 10:
-          // 暂无
-          break
-        case 1000:
-          this.$router.push({ path: '/rank/detail', query: { id } })
+      if (type === 1) {
+        this.$router.push({ path: '/songdetail', query: { id } })
+      } else if (type === 1000) {
+        this.$router.push({ path: '/rank/detail', query: { id } })
+      } else {
+        this.$message.info('正在开小差')
       }
     }
   }
