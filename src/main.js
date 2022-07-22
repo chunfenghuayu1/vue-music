@@ -6,8 +6,8 @@ import store from './store'
 import './assets/style/reset.css'
 // 引入图标
 import '@/assets/style/iconfont.css'
-// 引入element组件
-import './element_ui'
+// 引入element组件 打包时注释掉
+// import './element_ui'
 import 'swiper/dist/css/swiper.css'
 
 // 全局挂载aixios

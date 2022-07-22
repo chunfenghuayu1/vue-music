@@ -64,7 +64,7 @@ export default {
   watch: {
     $route: {
       immediate: true,
-      handler() {
+      handler () {
         const { id } = this.$route.query
         if (id) {
           // 不使用异步
@@ -74,18 +74,18 @@ export default {
           this.$store.dispatch('getMvComment', id, 100)
           this.$store.dispatch('getSimiMv', id)
         }
-      },
-    },
+      }
+    }
   },
   computed: {
     ...mapState({
       mvUrl: (state) => state.mv.mvUrl,
       mvDetail: (state) => state.mv.mvDetail,
       commentList: (state) => state.mv.commentList,
-      simiMv: (state) => state.mv.simiMv,
-    }),
+      simiMv: (state) => state.mv.simiMv
+    })
   },
-  components: { VideoPlayer, Comments },
+  components: { VideoPlayer, Comments }
 }
 </script>
 

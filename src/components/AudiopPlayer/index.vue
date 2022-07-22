@@ -384,7 +384,7 @@ export default {
   methods: {
     // 播放和暂停
     // false为播放
-    // 如果同一首歌多次点击，则会重新播放
+    // 如果同一首歌多次点击，则不会重新播放
     playOrParse (val) {
       this.play = val
       if (this.play) {

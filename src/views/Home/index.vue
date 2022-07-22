@@ -24,15 +24,15 @@ export default {
     async getData () {
       try {
         // 获取轮播图数据
-        await this.$store.dispatch('getBanner')
+        this.$store.dispatch('getBanner')
         // 获取热门歌单标签
         await this.$store.dispatch('getPlayListTags')
-        // 获取歌单详情数据
-        await this.$store.dispatch('getPlayListDetail')
         // 获取排行榜单数据
         await this.$store.dispatch('getRankList')
         // 获取排行榜单具体数据
-        await this.$store.dispatch('getRankListDetail')
+        this.$store.dispatch('getRankListDetail')
+        // 获取歌单详情数据
+        this.$store.dispatch('getPlayListDetail')
         this.$notify({
           title: '成功',
           message: '首页、排行榜数据加载完成',

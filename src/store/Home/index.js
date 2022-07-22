@@ -54,12 +54,7 @@ const actions = {
   // 获取轮播图数据
   async getBanner (ctx) {
     // 获取前清空所有数据
-    ctx.state.rankListDetail = []
     ctx.state.bannerList = []
-    ctx.state.rankList = []
-    ctx.state.rankAllList = []
-    ctx.state.playListTags = []
-    ctx.state.playListDetail = []
     const { data } = await reqBanner()
     // console.log(data)
     if (data.code === 200) {
@@ -97,6 +92,9 @@ const actions = {
   },
   // 获取热门歌单标签
   async getPlayListTags (ctx) {
+    // 清空数据
+    ctx.state.playListTags = []
+    ctx.state.playListDetail = []
     const { data } = await reqPlayListTags()
     if (data.code === 200) {
       // console.log(data)
