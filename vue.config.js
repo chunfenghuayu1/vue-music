@@ -16,7 +16,7 @@ module.exports = defineConfig({
   productionSourceMap: false,
   // 配置打包文件路径 打包时必须开启，不然加载不了本地js，css资源
   publicPath: './',
-  outputDir: 'dist1',
+  outputDir: 'dist',
   // 自动打开浏览器
   devServer: {
     host: '127.0.0.1',
