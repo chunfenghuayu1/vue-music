@@ -1,16 +1,14 @@
 import axios from 'axios'
 // 引入进度条
 import nprogress from 'nprogress'
-// 打包时注释掉
-// import 'nprogress/nprogress.css'
 
 const request = axios.create({
   // 基础路径
   // proxy代理已经配置
   // baseURL: '/api',
-  // baseURL: '',
   // 如果需要打包，则使用此地址
   baseURL: 'http://120.48.31.206:3000',
+  // baseURL: process.env.VUE_APP_BASE_API,
   // `withCredentials` 表示跨域请求时是否需要使用凭证
   withCredentials: true,
   // 请求超时
@@ -23,6 +21,7 @@ request.interceptors.request.use((config) => {
   // if (token) {
   //   config.headers.xxx = token
   // }
+  console.log(process.env.VUE_APP_BASE_API)
   nprogress.start()
   return config
 })

@@ -1,6 +1,6 @@
 {
   "name": "vue-music",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -29,6 +29,7 @@
     "@vue/eslint-config-standard": "^6.1.0",
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-transform-remove-console": "^6.9.4",
+    "compression-webpack-plugin": "^6.1.1",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
@@ -36,6 +37,7 @@
     "eslint-plugin-vue": "^8.0.3",
     "less": "^4.0.0",
     "less-loader": "^8.0.0",
+    "svg-sprite-loader": "^6.0.11",
     "vue-template-compiler": "^2.6.14",
     "webpack-bundle-analyzer": "^4.5.0"
   }

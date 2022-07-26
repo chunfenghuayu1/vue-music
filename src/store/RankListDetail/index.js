@@ -1,5 +1,4 @@
-import { reqPlayListComment, reqRankListDetail, reqSongDetail } from '@/api'
-import { formatPlayCount } from '@/utils/formatCount'
+import { reqPlayListComment, reqRankListDetail } from '@/api'
 import formatSong from '@/utils/formatSong'
 const state = {
   commentList: {},
@@ -13,14 +12,14 @@ const mutations = {
     })
     data.comments = [...data.hotComments, ...data.comments]
     // 格式化播放量
-    data.total1 = formatPlayCount(data.total)
+    data.total1 = formatSong.formartNum(data.total)
     state.commentList = data
   },
   GETRANKLISTDETAIL1 (state, data) {
     // 格式化播放量、订阅数、评论数、更新时间
-    data.playCount = formatPlayCount(data.playlist.playCount)
-    data.subscribedCount = formatPlayCount(data.playlist.subscribedCount)
-    data.commentCount = formatPlayCount(data.playlist.commentCount)
+    data.playCount = formatSong.formartNum(data.playlist.playCount)
+    data.subscribedCount = formatSong.formartNum(data.playlist.subscribedCount)
+    data.commentCount = formatSong.formartNum(data.playlist.commentCount)
     data.updateTime = formatSong.formartDate(
       data.playlist.updateTime,
       'yyyy年MM月dd日'

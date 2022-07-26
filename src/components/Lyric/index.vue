@@ -36,7 +36,7 @@ span::before {
   left: 0px;
   width: 100%;
   height: 30%;
-  background-color: #63bbd0;
+  background-color: var(--main-color);
   z-index: -1;
 
 }
@@ -50,7 +50,7 @@ span::before {
   .lyrics {
     p {
       font-size: 14px;
-      color: #909399;
+      color: var(--third-color);
       line-height: 30px;
     }
   }

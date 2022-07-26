@@ -23,16 +23,7 @@ export default {
     // 获取首页必须的数据
     async getData () {
       try {
-        // 获取轮播图数据
-        this.$store.dispatch('getBanner')
-        // 获取热门歌单标签
-        await this.$store.dispatch('getPlayListTags')
-        // 获取排行榜单数据
-        await this.$store.dispatch('getRankList')
-        // 获取排行榜单具体数据
-        this.$store.dispatch('getRankListDetail')
-        // 获取歌单详情数据
-        this.$store.dispatch('getPlayListDetail')
+        await this.initData()
         this.$notify({
           title: '成功',
           message: '首页、排行榜数据加载完成',
@@ -45,6 +36,18 @@ export default {
           type: 'error'
         })
       }
+    },
+    async initData () {
+      // 获取轮播图数据
+      this.$store.dispatch('getBanner')
+      // 获取热门歌单标签
+      await this.$store.dispatch('getPlayListTags')
+      // 获取排行榜单数据
+      await this.$store.dispatch('getRankList')
+      // 获取排行榜单具体数据
+      this.$store.dispatch('getRankListDetail')
+      // 获取歌单详情数据
+      this.$store.dispatch('getPlayListDetail')
     }
   }
 

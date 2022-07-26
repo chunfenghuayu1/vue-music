@@ -3,10 +3,11 @@
     <!-- 弹出框 -->
     <el-dialog
       title="登录"
-      :visible="true"
-      width="30%"
+      :visible="$store.state.login.dialogVisible"
+      width="25%"
       :before-close="handleClose"
       center
+      :lock-scroll="false"
     >
       <el-form
         status-icon
@@ -14,20 +15,50 @@
         :rules="rules"
         ref="ruleForm"
         label-position="left"
-        style="text-align:center;"
+        style="text-align: center"
       >
-        <el-form-item label="手机号" prop="phone"
-        label-width="100px">
-          <el-input type="text" autocomplete="off" v-model.number.trim="ruleForm.phone"></el-input>
+        <el-form-item
+          label="手机号"
+          prop="phone"
+          size="small"
+          label-width="100px"
+        >
+          <el-input
+            type="text"
+            autocomplete="off"
+            v-model.number.trim="ruleForm.phone"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="密码" label-width="100px"  prop="password">
-          <el-input type="password" autocomplete="off" v-model.trim="ruleForm.password"></el-input>
+        <el-form-item
+          label="密码"
+          label-width="100px"
+          size="small"
+          prop="password"
+        >
+          <el-input
+            type="password"
+            autocomplete="off"
+            v-model.trim="ruleForm.password"
+          ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm(ruleForm)" :disabled="ruleForm.phone === '' || ruleForm.password === ''?true:false"
+          <el-button
+            type="primary"
+            size="small"
+            @click="submitForm(ruleForm)"
+            :disabled="
+              ruleForm.phone === '' || ruleForm.password === '' ? true : false
+            "
             >提交</el-button
           >
-          <el-button @click="resetForm" :disabled="ruleForm.phone === '' || ruleForm.password === ''?true:false">重置</el-button>
+          <el-button
+            @click="resetForm"
+            size="small"
+            :disabled="
+              ruleForm.phone === '' || ruleForm.password === '' ? true : false
+            "
+            >重置</el-button
+          >
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -74,16 +105,14 @@ export default {
       this.$refs.ruleForm.validate(async (isPass) => {
         //  如果通过，则提交登录
         if (isPass) {
+          // 登录成功后，浏览器会自动携带cookie，因为后台进行了响应头设置cookie
           const res = await this.$store.dispatch('login', val)
-          // console.log(res)
           if (res.code === 200) {
             this.$message.success('登陆成功')
             this.$store.commit('dialogVisible', false)
             // 需要重置数据
             this.resetForm()
-            setTimeout(() => {
-              this.$router.go(0)
-            }, 2000)
+            this.$router.go(0)
           } else if (res.code === 502) {
             this.$message.error(res.message)
           }
@@ -101,5 +130,4 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-</style>
+<style></style>

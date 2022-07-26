@@ -10,6 +10,7 @@ const state = {
   lyric: []
 }
 const mutations = {
+  // 歌曲详情
   GETSONGDETAIL (state, data) {
     const { songs, privileges } = data
     // 是否有版权
@@ -23,6 +24,7 @@ const mutations = {
     })
     state.simiSong = data.songs
   },
+  // 评论数据
   GETCOMMENTLIST (state, data) {
     data.comments.forEach(item => {
       item.time1 = formatSong.formartDate(item.time, 'yyyy年MM月dd日')
@@ -68,7 +70,6 @@ const actions = {
     ctx.state.lyric = []
     const { data } = await reqLyric(id)
     if (data.code === 200) {
-      // console.log(data)
       const arr = data.lrc.lyric.split('\n')
       const newarr = []
       arr.forEach(item => {

@@ -10,6 +10,7 @@
       loading-text="搜索中..."
       @focus="handleFocus"
       :loading="loading"
+      style="width:100px;"
     >
       <el-option-group
         v-for="list in suggestInfo"
@@ -60,7 +61,7 @@ export default {
       }
     },
     // 搜索框聚焦
-    handleFocus () {
+    handleFocus (e) {
       // 暂不处理
     },
     // 获取搜索结果

@@ -8,8 +8,6 @@
       <p class="tag">{{ item.typeTitle }}</p>
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
-    <!-- <div class="swiper-button-prev" slot="button-prev"></div>
-    <div class="swiper-button-next" slot="button-next"></div> -->
   </swiper>
 </template>
 
@@ -51,7 +49,6 @@ export default {
   methods: {
     getTarget (type, id) {
       // type 1新歌首发 1000歌单 10新碟
-      // console.log(type, id)
       if (type === 1) {
         this.$router.push({ path: '/songdetail', query: { id } })
       } else if (type === 1000) {
@@ -103,7 +100,6 @@ export default {
       text-align: center;
       font-size: 14px;
       color: #fff;
-      // background-color: #63bbd0;
       background-color: rgba(180, 180, 180, 0.722);
       backdrop-filter: saturate(180%) blur(20px);
     }

@@ -1,19 +1,20 @@
 <template>
   <div class="main">
-    <div id="dplayer" ref="dplayer"></div>
+    <div
+      id="dplayer"
+      ref="dplayer"
+    ></div>
   </div>
 </template>
 
 <script>
 // 引入播放器
+
 import DPlayer from 'dplayer'
 export default {
-  components: {
-  },
+  components: {},
   data () {
-    return {
-
-    }
+    return {}
   },
   props: ['mvUrl'],
   watch: {
@@ -44,6 +45,7 @@ export default {
 <style lang="less" scoped>
 .main {
   width: 80%;
+
   #dplayer {
     height: 550px;
   }

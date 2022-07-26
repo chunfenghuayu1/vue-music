@@ -84,7 +84,7 @@ export default {
     i {
       display: block;
       font-style: normal;
-      color: #909399;
+      color: var(--third-color);
       margin-bottom: 5px;
     }
   }

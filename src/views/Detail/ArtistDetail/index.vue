@@ -197,7 +197,6 @@
                   @click="goTarget(item.id)"
                 />
               </swiper-slide>
-              <!-- <div class="swiper-pagination" slot="pagination"></div> -->
             </swiper>
           </div>
         </div>
@@ -222,7 +221,7 @@ export default {
       swiperOption: {
         // loop: true,
         spaceBetween: 5, // 图片间距
-        autoplay: false,
+        autoplay: true,
         slidesPerView: 3, // 展示几张
         slidesPerColumn: 3,
         grid: {
@@ -387,7 +386,7 @@ export default {
             margin: 5px 0;
           }
           .briefDesc-content {
-            color: #909399;
+            color: var(--third-color);
             text-indent: 2em;
             -webkit-box-orient: vertical;
             word-break: break-all;
@@ -400,7 +399,7 @@ export default {
             font-style: normal;
             cursor: pointer;
             font-size: 12px;
-            color: #909399;
+            color: var(--third-color);
           }
           .toggle {
             -webkit-line-clamp: 2;
@@ -412,7 +411,7 @@ export default {
       border: 1px solid #ebeef5;
       background-color: #fff;
       overflow: hidden;
-      color: #303133;
+      color: var(--second-color);
       transition: 0.3s;
       border-radius: 10px;
       box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
@@ -437,7 +436,7 @@ export default {
           bottom: 1px;
           width: 100%;
           height: 6px;
-          background: #63bbd0;
+          background: var(--main-color);
           z-index: -1;
         }
         .active {
@@ -454,7 +453,7 @@ export default {
           p {
             text-indent: 2em;
             font-size: 14px;
-            color: #909399;
+            color: var(--third-color);
             line-height: 30px;
           }
         }
@@ -468,7 +467,7 @@ export default {
       border: 1px solid #ebeef5;
       background-color: #fff;
       overflow: hidden;
-      color: #303133;
+      color: var(--second-color);
       transition: 0.3s;
       border-radius: 10px;
       box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);

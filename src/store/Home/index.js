@@ -1,5 +1,5 @@
 // 发现音乐、排行榜数据放在这里处理
-import { formatPlayCount } from '@/utils/formatCount'
+import formatSong from '@/utils/formatSong'
 import {
   reqBanner,
   reqRankList,
@@ -45,7 +45,7 @@ const mutations = {
     // console.log(data)
     // 处理播放量数据
     data.forEach(item => {
-      item.playCount = formatPlayCount(item.playCount)
+      item.playCount = formatSong.formartNum(item.playCount)
     })
     state.playListDetail = data
   }
@@ -73,7 +73,6 @@ const actions = {
     // console.log(res)
     if (data.code === 200) {
       ctx.commit('GETRANKLIST', data.list)
-      return 'ok'
     } else {
       return Promise.reject(new Error('获取排行榜失败'))
     }

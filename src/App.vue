@@ -8,7 +8,7 @@
         <el-aside width="220px">
           <Aside></Aside>
         </el-aside>
-        <el-main class="page-component__scroll el-scrollbar__wrap">
+        <el-main class="page-component__scroll el-scrollbar">
           <transition name="fade">
             <router-view></router-view>
           </transition>
@@ -16,8 +16,8 @@
       </el-container>
     </el-container>
     <!-- 播放器 -->
-    <AudiopPlayer></AudiopPlayer>
-    <LoginDialog v-if="dialogVisible"></LoginDialog>
+    <AudioPlayer></AudioPlayer>
+    <LoginDialog></LoginDialog>
   </div>
 </template>
 
@@ -25,23 +25,17 @@
 import Header from '@/components/Header'
 import Aside from '@/components/Aside'
 
-import { mapState } from 'vuex'
 export default {
   components: {
     Header,
     Aside,
-    AudiopPlayer: () => import('./components/AudiopPlayer/index.vue'),
-    LoginDialog: () => import('@/components/Login/LoginDialog.vue')
-  },
-  computed: {
-    ...mapState({
-      dialogVisible: state => state.login.dialogVisible
-    })
+    AudioPlayer: () => import(/* webpackChunkName: "AudioPlayer"  */ '@/components/AudioPlayer/index.vue'),
+    LoginDialog: () => import(/* webpackChunkName: "LoginDialog" */ '@/components/Login/LoginDialog.vue')
   }
 }
 </script>
 
-<style scoped>
+<style>
 .el-header {
   position: fixed;
   width: 100%;

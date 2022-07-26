@@ -59,7 +59,6 @@
 <script>
 import { mapState } from 'vuex'
 import VideoPlayer from '../../../components/VideoPlayer/index.vue'
-import Comments from '@/components/Comments/index.vue'
 export default {
   watch: {
     $route: {
@@ -85,7 +84,7 @@ export default {
       simiMv: (state) => state.mv.simiMv
     })
   },
-  components: { VideoPlayer, Comments }
+  components: { VideoPlayer }
 }
 </script>
 
@@ -109,7 +108,7 @@ export default {
       }
       .count {
         margin: 10px 0;
-        color: #909399;
+        color: var(--third-color);
         span {
           margin-right: 20px;
           font-size: 14px;
@@ -148,13 +147,13 @@ export default {
       .artist {
         margin: 5px 0;
         span {
-          color: #909399;
+          color: var(--third-color);
           font-size: 14px;
           cursor: pointer;
         }
       }
       .playCount {
-        color: #909399;
+        color: var(--third-color);
         font-size: 14px;
       }
     }

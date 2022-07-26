@@ -2,17 +2,23 @@
   <div>
     <el-row type="flex" align="bottom">
       <el-col :span="3">
-        <h1  v-if="title==''?true:false">热门歌单</h1>
-        <h1  v-else class="toggle">{{title}}<i class="el-icon-close" @click="closeTitle"></i></h1>
+        <h1 v-if="title == '' ? true : false">热门歌单</h1>
+        <h1 v-else class="toggle">
+          {{ title }}<i class="el-icon-close" @click="closeTitle"></i>
+        </h1>
       </el-col>
       <el-col :span="2">
-        <h3 :class="name==='hot'?'active':''"  @click="changeList('hot')">热门</h3>
+        <h3 :class="name === 'hot' ? 'active' : ''" @click="changeList('hot')">
+          热门
+        </h3>
       </el-col>
       <el-col :span="2">
-        <h3 @click="changeList('new')" :class="name==='new'?'active':''">最新</h3>
+        <h3 @click="changeList('new')" :class="name === 'new' ? 'active' : ''">
+          最新
+        </h3>
       </el-col>
     </el-row>
-    <el-row style="marginTop:15px;">
+    <el-row style="marginTop: 15px">
       <Album :playListDetail="tagList.playlists"></Album>
     </el-row>
   </div>
@@ -34,7 +40,7 @@ export default {
   },
   computed: {
     ...mapState({
-      tagList: state => state.playList.tagList
+      tagList: (state) => state.playList.tagList
     })
   },
   methods: {
@@ -42,7 +48,10 @@ export default {
       const { query } = this.$route
       if (query.order !== val) {
         if (query.cat) {
-          this.$router.push({ path: '/playlist', query: { order: val, cat: query.cat } })
+          this.$router.push({
+            path: '/playlist',
+            query: { order: val, cat: query.cat }
+          })
         } else {
           this.$router.push({ path: '/playlist', query: { order: val } })
         }
@@ -95,33 +104,33 @@ h1 {
 h3 {
   display: inline-block;
   margin: 10px 0 0 0;
-  color: #909399;
+  color: var(--third-color);
   cursor: pointer;
 }
 .active {
   position: relative;
-  color:#303133;
+  color: var(--second-color);
 }
 .active::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 1px;
-      width: 100%;
-      height: 6px;
-      background: #63bbd0;
-      z-index: -1;
- }
- .el-icon-close {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  width: 100%;
+  height: 6px;
+  background: var(--main-color);
+  z-index: -1;
+}
+.el-icon-close {
   vertical-align: top;
   font-size: 20px;
   font-weight: bold;
   margin-left: 10px;
   cursor: pointer;
- }
- .el-icon-close:hover {
+}
+.el-icon-close:hover {
   transform: rotate(180deg);
-  transition: all .5s;
-  color: #63bbd0;
- }
+  transition: all 0.5s;
+  color: var(--main-color);
+}
 </style>

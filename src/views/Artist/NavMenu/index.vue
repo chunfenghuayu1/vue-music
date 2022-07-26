@@ -144,13 +144,13 @@ h1 {
   padding: 5px;
   cursor: pointer;
   font-size: 14px;
-  color: #909399;
+  color: var(--third-color);
 }
 .el-card {
   border-radius: 10px;
 }
 .active {
-  background-color: #63bbd0;
+  background-color: var(--main-color);
   border-radius: 5px;
   color: #fff;
 }

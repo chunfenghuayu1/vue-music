@@ -1,5 +1,5 @@
 // 歌单数据放这里
-import { formatPlayCount } from '@/utils/formatCount'
+import formatSong from '@/utils/formatSong'
 import { reqListTags, reqPlayListDetail } from '@/api'
 
 const state = {
@@ -15,7 +15,7 @@ const mutations = {
   GETTAGLIST (state, data) {
     data.playlists.forEach((item) => {
       if (item.playCount) {
-        item.playCount = formatPlayCount(item.playCount)
+        item.playCount = formatSong.formartNum(item.playCount)
       }
     })
     state.tagList = data
@@ -53,7 +53,8 @@ const getters = {
     const obj = state.tags.categories
     for (const k in obj) {
       const newobj = {}
-      const arr = state.tags.sub.filter(item => item.category == k)
+      // 格式转换
+      const arr = state.tags.sub.filter(item => item.category + '' === k)
       newobj.tags = arr
       newobj.key = obj[k]
       list.push(newobj)

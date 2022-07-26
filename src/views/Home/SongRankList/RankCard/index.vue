@@ -30,7 +30,6 @@
             <router-link :to="{ path: '/songdetail', query: { id: item.id } }">
               {{ item.name }}
             </router-link>
-            <!-- <a v-for="artist in item.ar" :key="artist.id">{{artist.name}}</a> -->
             <a>
               <i v-for="(artist,index) in item.ar" :key="artist.id" @click="goTarget(artist.id)"><i v-if="index!==0">/</i>{{ artist.name }}</i>
             </a>
@@ -42,19 +41,12 @@
 </template>
 
 <script>
-import { formartDate } from '@/utils/formatCount'
+import formatSong from '@/utils/formatSong'
 export default {
-  // props: {
-  //   list: {
-  //     require: true,
-  //     default: () => {},
-  //     type: Object
-  //   }
-  // }
   props: ['list'],
   computed: {
     updateTime () {
-      return formartDate(this.list.updateTime, 'MM月dd日HH时mm分')
+      return formatSong.formartDate(this.list.updateTime, 'MM月dd日HH时mm分')
     }
   },
   methods: {
@@ -111,11 +103,11 @@ export default {
               font-style: normal;
             }
             &:nth-child(1) {
-              color: #303133;
+              color: var(--second-color);
               font-size: 14px;
             }
             &:nth-child(2) {
-              color: #909399;
+              color: var(--third-color);
               font-size: 14px;
             }
           }
@@ -128,11 +120,11 @@ export default {
   display: block;
   font-size: 22px;
   font-weight: bold;
-  color: #303133;
+  color: var(--second-color);
   margin-bottom: 5px;
 }
 .header-tip {
   font-size: 12px;
-  color: #909399;
+  color: var(--third-color);
 }
 </style>

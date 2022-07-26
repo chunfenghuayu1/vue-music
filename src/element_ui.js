@@ -31,9 +31,9 @@ import {
   Select,
   Option,
   OptionGroup,
-  Dialog
+  Dialog,
+  Link
 } from 'element-ui'
-
 Vue.use(Button)
 Vue.use(Header)
 Vue.use(Container)
@@ -64,6 +64,7 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(OptionGroup)
 Vue.use(Dialog)
+Vue.use(Link)
 
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification

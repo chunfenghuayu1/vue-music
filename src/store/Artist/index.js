@@ -1,5 +1,5 @@
 import { reqArtistList } from '@/api'
-import { formatPlayCount } from '@/utils/formatCount'
+import formatSong from '@/utils/formatSong'
 const state = {
   artistList: []
 }
@@ -7,7 +7,7 @@ const mutations = {
   GETARTISTLIST (state, data) {
     // 处理列表的粉丝数据，进行格式化
     data.artists.forEach(item => {
-      item.fansCount = formatPlayCount(item.fansCount)
+      item.fansCount = formatSong.formartNum(item.fansCount)
     })
     state.artistList = data
   }

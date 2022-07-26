@@ -83,7 +83,7 @@ export default {
       }
       .content {
         font-size: 14px;
-        color: #909399;
+        color: var(--third-color);
         .aritst {
           cursor: pointer;
         }

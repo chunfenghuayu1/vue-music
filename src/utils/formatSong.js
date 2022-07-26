@@ -1,7 +1,7 @@
 import { formatSongInfo } from './song'
 
 export default {
-  // 数字过万的处理
+  // 数字过万的处理 处理播放次数过万
   formartNum (val) {
     let num = 0
     if (val > 9999) {
@@ -55,33 +55,24 @@ export default {
   // 评论时间格式化处理
   formatMsgTime (duration) {
     let result = ''
-    const NOW = new Date()
-    const PAST = new Date(duration)
+    if (duration !== 0) {
+      const NOW = new Date()
+      const PAST = new Date(duration)
 
-    // 判断是当天的时间 显示格式 10：30
-    if (NOW.toDateString() === PAST.toDateString()) {
-      result = this.formartDate(duration, 'HH:mm')
-      // 时间为当年 显示月日 时间戳
-    } else if (PAST.getFullYear() === NOW.getFullYear()) {
-      result = this.formartDate(duration, 'MM月dd日 HH:mm')
-    } else {
-      result = this.formartDate(duration, 'yyyy年MM月dd日')
-    }
-
-    return result
-  },
-  // 添加歌曲到播放列表，过滤重复的歌曲
-  concatPlayList (newList = [], oldList = []) {
-    const arr = [...oldList, ...newList]
-    const map = new Map()
-
-    for (const item of arr) {
-      if (!map.has(item.id)) {
-        map.set(item.id, item)
+      // 判断是当天的时间 显示格式 10：30
+      if (NOW.toDateString() === PAST.toDateString()) {
+        result = this.formartDate(duration, 'HH:mm')
+        // 时间为当年 显示月日 时间戳
+      } else if (PAST.getFullYear() === NOW.getFullYear()) {
+        result = this.formartDate(duration, 'MM月dd日 HH:mm')
+      } else {
+        result = this.formartDate(duration, 'yyyy年MM月dd日')
       }
-    }
 
-    return [...map.values()]
+      return result
+    } else {
+      return duration
+    }
   },
   // 处理歌曲
   formatSongs (list, privileges) {

@@ -46,25 +46,12 @@ export default {
         })
       }
     }
-    // 获取content组件传递的参数
-    // changeList1 (val) {
-    //   this.order = val
-    //   this.cat = ''
-    //   this.getTagList()
-    // },
-    // //  获取Navmenu组件传递的参数
-    // changeList2 (val) {
-    //   // console.log(val)
-    //   this.cat = val
-    //   this.getTagList()
-    // }
   },
   watch: {
     $route: {
       immediate: true,
       handler (newval, oldval) {
         const { cat, order } = newval.query
-        // console.log(newval)
         if (!cat) {
           this.cat = ''
           this.order = order

@@ -23,8 +23,8 @@
         round
         type="danger"
         style="
-          background-color: #63bbd0;
-          border-color: #63bbd0;
+          background-color: var(--main-color);
+          border-color: var(--main-color);
           margin-top: 10px; ;
         "
         @click="submitCom(textarea)"
@@ -177,7 +177,7 @@ export default {
         font-size: 14px;
         font-style: normal;
         font-weight: normal;
-        color: #909399;
+        color: var(--third-color);
         margin-left: 20px;
       }
     }
@@ -190,7 +190,7 @@ export default {
       border: 1px solid #ebeef5;
       background-color: #fff;
       overflow: hidden;
-      color: #303133;
+      color: var(--second-color);
       transition: 0.3s;
       border-radius: 10px;
       box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
@@ -202,7 +202,6 @@ export default {
         overflow: hidden;
         border-radius: 50%;
         margin: 10px;
-        background-color: pink;
         img {
           width: 100%;
           height: 100%;
@@ -214,7 +213,7 @@ export default {
         flex: 1;
         font-size: 14px;
         .username {
-          color: #909399;
+          color: var(--third-color);
           padding-bottom: 10px;
         }
         .text {
@@ -230,14 +229,14 @@ export default {
           margin: 5px 0;
           line-height: 28px;
           span:nth-child(1) {
-            color: #909399;
+            color: var(--third-color);
             margin-right: 5px;
           }
         }
         .foot {
           display: flex;
           justify-content: space-between;
-          color: #909399;
+          color: var(--third-color);
           .tips {
             i {
               font-style: normal;

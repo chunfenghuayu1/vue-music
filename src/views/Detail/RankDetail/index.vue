@@ -84,23 +84,35 @@
               align="center"
             >
             </el-table-column>
-            <el-table-column
-              label="音乐标题"
-              show-overflow-tooltip
-            >
-            <template slot-scope="{row}">
-              <span @click="$router.push({path:`/songdetail?id=${row.id}`})" style="cursor:pointer;">{{row.name}}</span>
-            </template>
+            <el-table-column label="音乐标题" show-overflow-tooltip>
+              <template slot-scope="{ row }">
+                <span
+                  @click="$router.push({ path: `/songdetail?id=${row.id}` })"
+                  style="cursor: pointer"
+                  >{{ row.name }}</span
+                >
+              </template>
             </el-table-column>
             <el-table-column label="歌手">
               <template slot-scope="{ row }">
-                <span v-for="(item, index) in row.singer" :key="index" @click="$router.push({path:`/artist/detail?id=${item.id}`})" style="cursor:pointer;">
+                <span
+                  v-for="(item, index) in row.singer"
+                  :key="index"
+                  @click="
+                    $router.push({ path: `/artist/detail?id=${item.id}` })
+                  "
+                  style="cursor: pointer"
+                >
                   <span v-if="index !== 0">/</span>
                   {{ item.name }}
                 </span>
               </template>
             </el-table-column>
-            <el-table-column prop="album.name" label="专辑" show-overflow-tooltip></el-table-column>
+            <el-table-column
+              prop="album.name"
+              label="专辑"
+              show-overflow-tooltip
+            ></el-table-column>
             <el-table-column
               prop="dt"
               label="时长"
@@ -126,15 +138,15 @@
           </el-table>
           <!-- 分页器 -->
           <el-pagination
-          style="margin-top: 20px;"
-          background
-          layout="prev, pager, next"
-          :hide-on-single-page="true"
-          :total="totalPage"
-          :page-size="pageSize"
-          :current-page="currentPage"
-          align="center"
-          @current-change="handleCurrentChange"
+            style="margin-top: 20px"
+            background
+            layout="prev, pager, next"
+            :hide-on-single-page="true"
+            :total="totalPage"
+            :page-size="pageSize"
+            :current-page="currentPage"
+            align="center"
+            @current-change="handleCurrentChange"
           >
           </el-pagination>
         </div>
@@ -151,7 +163,6 @@
 </template>
 
 <script>
-import Comments from '@/components/Comments/index.vue'
 import { mapState } from 'vuex'
 export default {
   data () {
@@ -162,9 +173,6 @@ export default {
       // 每页多少条
       pageSize: 10
     }
-  },
-  components: {
-    Comments
   },
   computed: {
     ...mapState({
@@ -178,7 +186,10 @@ export default {
     songsDetailListPage () {
       const { songsDetailList, currentPage, pageSize } = this
       if (songsDetailList) {
-        return songsDetailList.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+        return songsDetailList.slice(
+          (currentPage - 1) * pageSize,
+          currentPage * pageSize
+        )
       } else {
         return []
       }
@@ -237,7 +248,7 @@ export default {
       for (let i = ListPage.length - 1; i >= 0; i--) {
         list.push(ListPage[i])
       }
-      list.forEach(async item => {
+      list.forEach(async (item) => {
         await this.$store.dispatch('addMusic', item)
       })
       this.$bus.$emit('PLAYMUSIC', ListPage[0])
@@ -249,7 +260,7 @@ export default {
 <style lang="less" scoped>
 .main {
   display: flex;
-   margin-bottom: 50px;
+  margin-bottom: 50px;
   .left {
     flex: 1;
     margin-right: 10px;
@@ -257,7 +268,7 @@ export default {
       border: 1px solid #ebeef5;
       background-color: #fff;
       overflow: hidden;
-      color: #303133;
+      color: var(--second-color);
       transition: 0.3s;
       border-radius: 10px;
       box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
@@ -285,8 +296,9 @@ export default {
             word-break: break-all;
           }
           .updateTime {
-            color: #909399;
+            color: var(--third-color);
             font-size: 14px;
+            margin: 10px 0;
           }
         }
         .second {
@@ -300,13 +312,13 @@ export default {
           }
           .cover-date {
             font-style: normal;
-            color: #909399;
+            color: var(--third-color);
           }
         }
         .third {
           display: flex;
           margin-top: 20px;
-          color: #909399;
+          color: var(--third-color);
           font-size: 14px;
           p {
             margin-right: 20px;
@@ -322,7 +334,7 @@ export default {
             margin: 30px 0 10px 0;
           }
           .briefDesc-content {
-            color: #909399;
+            color: var(--third-color);
             text-indent: 2em;
             -webkit-box-orient: vertical;
             word-break: break-all;
@@ -335,7 +347,7 @@ export default {
             font-style: normal;
             cursor: pointer;
             font-size: 12px;
-            color: #909399;
+            color: var(--third-color);
           }
           .toggle {
             -webkit-line-clamp: 4;
@@ -347,7 +359,7 @@ export default {
       border: 1px solid #ebeef5;
       background-color: #fff;
       overflow: hidden;
-      color: #303133;
+      color: var(--second-color);
       transition: 0.3s;
       border-radius: 10px;
       box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
@@ -363,7 +375,7 @@ export default {
         font-size: 20px;
         em {
           font-size: 12px;
-          color: #909399;
+          color: var(--third-color);
           font-style: normal;
           font-weight: normal;
           margin-left: 20px;
@@ -378,7 +390,7 @@ export default {
     border: 1px solid #ebeef5;
     background-color: #fff;
     overflow: hidden;
-    color: #303133;
+    color: var(--second-color);
     transition: 0.3s;
     border-radius: 10px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);

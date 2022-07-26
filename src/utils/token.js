@@ -1,28 +1,28 @@
 // 对外暴露一个函数
 // 存储token
-export const setToken = (token) => {
-  localStorage.setItem('token', token)
-}
-// 获取token
-export const getToken = () => {
-  return localStorage.getItem('token')
-}
-// 清空token
-export const removeToken = () => {
-  localStorage.removeItem('token')
-}
-// 存储cookie
-export const setCookie = (Cookie) => {
-  localStorage.setItem('cookie', Cookie)
-}
-// 获取cookie
-export const getCookie = () => {
-  return localStorage.getItem('cookie')
-}
-// 清空cookie
-export const removeCookie = () => {
-  localStorage.removeItem('cookie')
-}
+// export const setToken = (token) => {
+//   localStorage.setItem('token', token)
+// }
+// // 获取token
+// export const getToken = () => {
+//   return localStorage.getItem('token')
+// }
+// // 清空token
+// export const removeToken = () => {
+//   localStorage.removeItem('token')
+// }
+// // 存储cookie
+// export const setCookie = (Cookie) => {
+//   localStorage.setItem('cookie', Cookie)
+// }
+// // 获取cookie
+// export const getCookie = () => {
+//   return localStorage.getItem('cookie')
+// }
+// // 清空cookie
+// export const removeCookie = () => {
+//   localStorage.removeItem('cookie')
+// }
 // 存储登录状态
 export const setisLogin = (value) => {
   localStorage.setItem('isLogin', value)

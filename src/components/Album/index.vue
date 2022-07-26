@@ -83,12 +83,6 @@ export default {
     position: absolute;
     top: 5px;
     right: 5px;
-    // background: linear-gradient(
-    //   to right,
-    //   #63bbd000 0%,
-    //   #63bbd080 97%,
-    //   #63bbd080 100%
-    // );
     background-color: rgba(180, 180, 180, 0.722);
     backdrop-filter: saturate(180%) blur(20px);
     border-radius: 15px;
@@ -106,7 +100,7 @@ export default {
 .body-title {
   display: block;
   margin-bottom: 10px;
-  color: #303133;
+  color: var(--second-color);
   height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -119,9 +113,16 @@ export default {
 .tags {
   a {
     margin-right: 10px;
-    color: #63bbd0;
+    color: var(--main-color);
     font-size: 12px;
     cursor: pointer;
   }
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--main-color);
 }
 </style>

@@ -1,5 +1,5 @@
 import { reqMv, commentMv, mvDetail, mvUrl, simiMv } from '@/api'
-import { formatPlayCount } from '@/utils/formatCount'
+import formatSong from '@/utils/formatSong'
 
 const state = {
   // 存储mv列表数据
@@ -13,7 +13,7 @@ const state = {
 const mutations = {
   GETNAVMENU (state, data) {
     data.forEach(item => {
-      item.playCount1 = formatPlayCount(item.playCount)
+      item.playCount1 = formatSong.formartNum(item.playCount)
     })
     state.mvList = data
   },
@@ -21,7 +21,7 @@ const mutations = {
     state.mvUrl = data.data
   },
   GETMVDETAIL (state, data) {
-    data.data.playCount1 = formatPlayCount(data.data.playCount)
+    data.data.playCount1 = formatSong.formartNum(data.data.playCount)
     state.mvDetail = data.data
   },
   GETMVCOMMENT (state, obj) {
@@ -29,7 +29,7 @@ const mutations = {
   },
   GETSIMIMV (state, data) {
     data.mvs.forEach(item => {
-      item.playCount1 = formatPlayCount(item.playCount)
+      item.playCount1 = formatSong.formartNum(item.playCount)
     })
     state.simiMv = data.mvs
   }

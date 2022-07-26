@@ -15,7 +15,7 @@
         <div class="list">
           <ul>
             <li v-for="(item, index) in list.list" :key="index">
-              <el-row type="flex">
+              <el-row>
                 <el-col :span="2" class="type">{{ index + 1 }}</el-col>
                 <el-col :span="2" class="state">
                   <span
@@ -31,7 +31,7 @@
                     {{ item.name }}
                   </router-link>
                 </el-col>
-                <el-col :span="12" class="author" :pull="1">
+                <el-col :span="12" class="author">
                   <span v-for="(ar, index) in item.ar" :key="index" @click="goTarget(ar.id)">
                   <span v-if="index!==0">/</span>
                   {{ ar.name }}
@@ -41,7 +41,7 @@
             </li>
             <li>
               <el-row>
-                <el-col :span="6" class="all"
+                <el-col :span="24" class="all"
                   ><router-link
                     :to="{ path: '/rank/detail', query: { id: list.id } }"
                     >查看全部 &gt;</router-link
@@ -96,10 +96,10 @@ export default {
         background-color: transparent;
       }
       &:nth-child(4) .type {
-        color: #909399;
+        color: var(--third-color);
       }
       &:nth-child(5) .type {
-        color: #909399;
+        color: var(--third-color);
       }
     }
   }
@@ -110,7 +110,7 @@ export default {
 }
 
 .state {
-  color: #909399;
+  color: var(--third-color);
 }
 .songname {
   color: #606266;
@@ -123,7 +123,7 @@ export default {
   cursor: pointer;
 }
 .author {
-  color: #909399;
+  color: var(--third-color);
   text-align: right;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -137,12 +137,12 @@ export default {
   cursor: pointer;
 }
 .type1 {
-  color: #909399;
+  color: var(--third-color);
 }
 .all {
-  color: #909399;
+  color: var(--third-color);
 }
-.all:hover {
+.all a:hover {
   color: #606266;
   cursor: pointer;
 }

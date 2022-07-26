@@ -106,7 +106,7 @@ export default {
   font-size: 12px;
 }
 .active {
-  background: #63bbd0;
+  background: var(--main-color);
   border-radius: 3px;
   color: #f5f5f5;
   padding: 5px;
