@@ -7,8 +7,7 @@ const request = axios.create({
   // proxy代理已经配置
   // baseURL: '/api',
   // 如果需要打包，则使用此地址
-  baseURL: 'http://120.48.31.206:3000',
-  // baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: process.env.VUE_APP_BASE_API,
   // `withCredentials` 表示跨域请求时是否需要使用凭证
   withCredentials: true,
   // 请求超时
